@@ -25,6 +25,10 @@ body {
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
 }
 
+p.ui-body { text-align: justify; }
+
+:focus { box-shadow: none !important}
+
 /* Campus Party header-menu */
 #header-menu { 
     top: 0 !important; 
@@ -95,3 +99,53 @@ body {
 .cp-bg-activities-2 {}
 .cp-bg-activities-3 {}
 
+#page-about h3 { text-align: center; }
+
+.ui-slider-handle, .ui-slider-track { 
+    border-radius: 5em !important; height: 3em !important;
+} 
+
+.ui-slider-handle { width: 3em !important; background-color: #005298 !important; }
+.ui-slider-track {  }
+
+.ui-slider-inneroffset { width: 2.89em !important; }
+
+.ui-slider-switch { }
+
+.ui-slider-handle {  }
+
+/* Beacon notifications */
+#beacon-notifications { box-shadow: none !important;}
+
+#beacon-notifications li { text-align: center !important; }
+
+#beacon-notifications .ui-li-static:not(.ui-first-child):not(.ui-last-child) { color: #898b8c !important; }
+
+#beacon-notifications .ui-first-child { color: #7b7d7f !important; }
+
+#beacon-notifications .ui-last-child { color: #a9aaab !important; }
+
+/* Schedule */
+
+#schedule-filter-bar {
+    position: fixed;
+    height: 3em;
+    width: 15em;
+    top: 10em;
+    right: -12em;
+    background: #fff;
+    border-radius: 0.5em 0 0 0.5em;
+    box-shadow: #898b8c 0px 1px 5px
+}
+
+#schedule-filter-bar a {
+    display: block;
+    width: 1em;
+    height: 1em;
+    padding: 1em;
+}
+
+#btn-show-schedule-filter-bar {
+}
+
+.filter-bar-hidden { right: -13em !important }
