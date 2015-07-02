@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--
+This file is part of Campus Party - Recife 2015 App.
+Campus Party - Recife 2015 App is free software: you can redistribute it 
+and/or modify it under the terms of the GNU General Public License as 
+published by the Free Software Foundation, either version 3 of the License, 
+or (at your option) any later version.
+
+Campus Party - Recife 2015 App is distributed in the hope that it will be 
+useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General 
+Public License for more details.
+
+You should have received a copy of the GNU General Public License along 
+with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="js/jquerymobile/jquery.mobile.structure-1.4.5.css">
+        <link rel="stylesheet" type="text/css" href="css/cprecife.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <script type="text/javascript" src="js/jquery/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="js/jquerymobile/jquery.mobile-1.4.5.js"></script>
+        <script type="text/javascript" src="js/BigEyesSolution/ApiCache.js"></script>
+        <script type="text/javascript" src="js/BigEyesSolution/ProximityMonitor.js"></script>
+        <script type="text/javascript" src="js/BigEyesSolution/BigEyesSolutionApp.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <title>Campus Party Recife 2015</title>
+    </head>
+    <body>
+        <div id="header-menu" data-role="header" data-position="fixed" data-fullscreen="true" data-tap-toggle="false">
+            <div data-role="navbar">
+                <ul>
+                    <li class="cp-bg-main"><a id="btn-navbar-schedule" href="#page-schedule">
+                        <img src="img/icon-schedule.png" alt="">
+                        <p>Agenda</p>
+                    </a></li>
+                    <li class="cp-bg-creativity"><a id="btn-navbar-news" href="#page-news">
+                        <img src="img/icon-news.png" alt="">
+                        <p>Destaques</p>
+                    </a></li>
+                    <li class="cp-bg-innovation"><a id="btn-navbar-beacon" href="#page-beacon">
+                        <img src="img/icon-beacon.png" alt="">
+                        <p>Beacon</p>
+                    </a></li>
+                    <li class="cp-bg-developers"><a id="btn-navbar-about" href="#page-about">
+                        <img src="img/icon-about.png" alt="">
+                        <p>Sobre</p>
+                    </a></li>
+                </ul>
+            </div>
+        </div> <!-- end #header-menu -->
+        
+        <section id="page-schedule" data-role="page">
+            <div data-role="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" class="be-ui-footer-line cp-bg-main">
+                <img src="img/cp-logo.png" alt="" class="cp-bg-main">
+            </div>
+            
+            <div role="main" class="ui-content">
+                
+            </div>
+        </section> <!-- end #page-schedule -->
+        
+        <section id="page-news" data-role="page">
+            <div data-role="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" class="be-ui-footer-line cp-bg-creativity">
+                <img src="img/cp-logo.png" alt="" class="cp-bg-creativity">
+            </div>
+            
+            <div role="main" class="ui-content">
+                
+            </div>
+        </section> <!-- end #page-news -->
+        
+        <section id="page-beacon" data-role="page">
+            <div data-role="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" class="be-ui-footer-line cp-bg-innovation">
+                <img src="img/cp-logo.png" alt="" class="cp-bg-innovation">
+            </div>
+            
+            <div role="main" class="ui-content">
+                
+            </div>
+        </section> <!-- end #page-beacon -->
+        
+        <section id="page-about" data-role="page">
+            <div data-role="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" class="be-ui-footer-line cp-bg-developers">
+                <img src="img/cp-logo.png" alt="" class="cp-bg-developers">
+            </div>
+            
+            <div role="main" class="ui-content">
+                
+            </div>
+        </section> <!-- end #page-about -->
+    </body>
+</html>

@@ -1,0 +1,81 @@
+/*
+ * This file is part of Campus Party - Recife 2015 App.
+ * Campus Party - Recife 2015 App is free software: you can redistribute it 
+ * and/or modify it under the terms of the GNU General Public License as 
+ * published by the Free Software Foundation, either version 3 of the License, 
+ * or (at your option) any later version.
+ * 
+ * Campus Party - Recife 2015 App is distributed in the hope that it will be 
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General 
+ * Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along 
+ * with Campus Party - Recife 2015 App.
+ * If not, see <http://www.gnu.org/licenses/>.
+ */
+
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+}
+
+/* Campus Party header-menu */
+#header-menu { border: none !important; }
+
+#header-menu li a { color: #ffffff !important; border: none !important; text-align: center }
+
+#header-menu li { border: none !important; }
+
+#header-menu li p {
+    margin: 0 !important;
+    font-size: 1em;
+    line-height: 1em;
+}
+
+#header-menu li img {
+    width: 65%;
+    height: auto;
+}
+
+/* footer */
+.be-ui-footer-line { height: 1em !important; text-align: center }
+
+.be-ui-footer-line img { 
+    width: 4em; 
+    height: auto; 
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-radius: 2em;
+    margin-top: -1.3em !important;
+}
+
+/* Campus Party colors */
+.cp-bg-earth    { background-color: #288ED6 !important }
+.cp-bg-moon     { background-color: #20508E !important }
+.cp-bg-jupter   { background-color: #724C7B !important }
+.cp-bg-venus    { background-color: #943E61 !important }
+.cp-bg-mars     { background-color: #EE872A !important }
+.cp-bg-saturn   { background-color: #89BA4D !important }
+.cp-bg-workshop { background-color: #2F86A0 !important }
+.cp-bg-startupmakers { background-color: #2F86A0 !important }
+
+.cp-bg-main { background-color: #0099ff !important; }
+.cp-bg-innovation { background-color: #005298 !important; }
+.cp-bg-creativity { background-color: #de1c85 !important; }
+.cp-bg-digital-ent { background-color: #ff5a00 !important; }
+.cp-bg-developers { background-color: #77216E !important; }
+.cp-bg-freesoftware { background-color: #1f9eb7 !important; }
+.cp-bg-science { background-color: #2eb135; }
+
+.cp-bg-activities-1 {}
+.cp-bg-activities-2 {}
+.cp-bg-activities-3 {}
+
