@@ -25,7 +25,9 @@ body {
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
 }
 
-p.ui-body { text-align: justify; }
+a, p { text-align: justify; font-family: robotoregular; }
+
+h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
 
 :focus { box-shadow: none !important}
 
