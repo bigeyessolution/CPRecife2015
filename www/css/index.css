@@ -26,20 +26,36 @@ body {
 }
 
 /* Campus Party header-menu */
-#header-menu { border: none !important; }
+#header-menu { 
+    top: 0 !important; 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    border: none !important; 
+}
 
-#header-menu li a { color: #ffffff !important; border: none !important; text-align: center }
+#header-menu li { width: 25% !important; box-shadow: #1f1f1f -1px 1px 5px 0px}
+
+#header-menu li a { 
+    padding-top: 2.5em !important;
+    border: none !important; 
+    color: #ffffff !important; 
+    border: none !important; 
+    margin: 0 !important;
+    text-align: center 
+}
 
 #header-menu li { border: none !important; }
 
 #header-menu li p {
+    text-align: center;
     margin: 0 !important;
     font-size: 1em;
-    line-height: 1em;
+    line-height: 2em;
 }
 
 #header-menu li img {
     width: 65%;
+    border: none;
     height: auto;
 }
 
