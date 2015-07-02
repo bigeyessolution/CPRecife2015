@@ -31,19 +31,28 @@ var BigEyesSolutionApp = {
     initialize: function() {
         //Get information about device
         //Get language
-        this.googleAnalytics.init(
-            this.successHandler, this.errorHandler, "UA-59229933-2", 10
-        );
+//        this.googleAnalytics.init(
+//            this.successHandler, this.errorHandler, "UA-59229933-2", 10
+//        );
 
         //if is iOS: window.plugins.webviewcolor.change('#FFFFFF');
     },
     /**
+     * Verify if the applications is running with cordova environment.
+     * 
+     * @returns {Boolean}
+     */
+    isOnCordova: function () { 
+        return typeof cordova !== 'undefined'; 
+    },
+    /**
+     * Add an jQuery Event handler to an object.
      * 
      * @param {String} selector
      * @param {String} events
      * @param {Function} handler
      */
-    addJqueryEvent: function (selector, events, handler) {
+    addjQueryEvent: function (selector, events, handler) {
         this.jQueryEvents.push({ selector: selector, events: events, handler: handler });
     },
     /**
@@ -51,30 +60,18 @@ var BigEyesSolutionApp = {
      * @returns {Void}
      */
     bindEvents: function() {
-        $( ":mobile-pagecontainer" ).on("pagecontainerbeforechange", this.beforePageChange);
-        $( ":mobile-pagecontainer" ).on( "pagecontainershow", this.onPageShow);
-        
         for (var i = 0; i < this.jQueryEvents.length; i++) {
             var event = this.jQueryEvents[i];
             $(event.selector).on(event.events, event.handler);
         }
         
-        cordova.plugins.backgroundMode.onactivate = this.onBackgroundModeActivate;
-        cordova.plugins.backgroundMode.ondeactivate = this.onBackgroundModeDectivate;
+//        cordova.plugins.backgroundMode.onactivate = this.onBackgroundModeActivate;
+//        cordova.plugins.backgroundMode.ondeactivate = this.onBackgroundModeDectivate;
     },
     onDevicePause: function () {
         
     },
     onDeviceResume: function () {
-        
-    },
-    onPageShow: function (event, ui) {
-        var prevPage = ui.prevPage.attr("id");
-        var toPage = ui.toPage.attr("id");;
-        
-    },
-    beforePageChange: function (event, ui) {
-        var prevPage = ui.prevPage.attr("id");;
         
     },
     onBackgroundModeActivate: function () {

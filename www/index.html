@@ -39,6 +39,7 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
         <script type="text/javascript" src="js/BigEyesSolution/ProximityMonitor.js"></script>
         <script type="text/javascript" src="js/BigEyesSolution/BigEyesSolutionApp.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/ui-functions.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <title>Campus Party Recife 2015</title>
     </head>
@@ -106,19 +107,23 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
             </div>
             
             <div role="main" class="ui-content">
-                <div id="beacon-on" style="display: non;" class="ui-body">
-                    <img src="img/img-beacon-on.png" alt="Beacon On" style="width: 80%; height: auto;">         
-                    <h1>Fique sabendo o que est&#225; rolando em cada palco.</h1>
-                    <p>A CP Recife 2015 traz essa novidade para voc&#234;, notifica&ccedil;&#245;es das palestras que est&#227;o acontecendo em cada palco, basta passar em frente.</p>
+                <div id="beacon-on" class="ui-body">
+                    <img src="img/img-beacon-on.png" alt="Beacon On" style="width: 70%; height: auto;">         
+                    <h2>Saiba o que est&#225; rolando nos palcos.</h2>
+                    <p>
+                        A CP Recife 2015 traz essa novidade para voc&#234;: 
+                        basta passar em frente ao palco para saber qual &eacute; 
+                        a palestra.
+                    </p>
                 </div>   
                 
-                <div id="beacon-off" style="display: none;" class="ui-body">
+                <div id="beacon-off" class="ui-body">
                     <img src="img/img-beacon-off.png" alt="Beacon On" style="width: 80%; height: auto;">         
-                    <h1>Quer ficar sabendo o que est&#225; rolando em cada palco?</h1>
+                    <h2>Quer ficar sabendo o que est&#225; rolando em cada palco?</h2>
                     <p>Ative o sensor de proximidade.</p>
                 </div>   
                 
-                <div id="beacon-notify" style="display: none;" class="ui-body">
+                <div id="beacon-notify" class="ui-body">
                     <img src="img/img-beacon-notify.png" alt="Beacon On" style="width: 80%; height: auto;">
                     <div class="ui-body">                        
                         <ul id="beacon-notifications" data-role="listview" data-inset="true">

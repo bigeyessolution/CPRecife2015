@@ -15,17 +15,53 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-//document.addEventListener('deviceready', function () {
-//    BigEyesSolutionApp.initialize();
-//    
-//    $("[data-role='navbar']").navbar();
-//    $("#header-menu").toolbar();
-//}, false);
+BigEyesSolutionApp.initialize();
 
-$(function () {
-//    BigEyesSolutionApp.initialize();
+BigEyesSolutionApp.addjQueryEvent('#btn-beacon-sensor', 'change', function() {
+    ProximityMonitor.enableMonitoring(getBtnBeaconStatus());
+    showBeaconStausDiv();
+});
+
+BigEyesSolutionApp.addjQueryEvent(
+    ':mobile-pagecontainer', 'pagecontainerbeforechange', function (event, ui) {
+        var prevPage = ui.prevPage.attr("id");
+        
+});
+
+BigEyesSolutionApp.addjQueryEvent(
+    ':mobile-pagecontainer', 'pagecontainershow', function (event, ui) {
+        var prevPage = ui.prevPage.attr("id");
+        var toPage = ui.toPage.attr("id");
+        
+        switch (toPage) {
+            case 'page-schedule':
+                break;
+            case 'page-schedule-by-day':
+                break;
+            case 'page-news':
+                break;
+            case 'page-beacon':
+                showBeaconStausDiv();
+                break;
+            case 'page-abount':
+                break;
+        }
+});
+
+/**
+ * Execute task when device status is ready.
+ * @returns {undefined}
+ */
+function onDeviceReady () {
+    prepareUI();
     
-    $("[data-role='navbar']").navbar();
-    $("#header-menu").toolbar(); console.log("Inicio");
-})
+    BigEyesSolutionApp.bindEvents();
+    
+}
 
+if (BigEyesSolutionApp.isOnCordova()) {
+    console.log(BigEyesSolutionApp.isOnCordova());
+    document.addEventListener('deviceready', onDeviceReady, false);
+} else {
+    $(onDeviceReady);
+}

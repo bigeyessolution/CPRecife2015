@@ -15,28 +15,3 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-var ProximityMonitor = {
-    beaconList: [],
-    beaconRegions: [],
-    beaconMonitoring: false,
-    init: function (listOfBeacons) {
-        
-    },
-    addBeacon: function (id, uuid, major, minor) {
-        
-    },
-    clearBeacons: function () {
-        
-    },
-    /**
-     * 
-     * @param {Boolean} status
-     * @returns {undefined}
-     */
-    enableMonitoring: function (status) {
-        this.beaconMonitoring = status;
-    },
-    isMonitoring: function () {
-        return this.beaconMonitoring;
-    }
-}
