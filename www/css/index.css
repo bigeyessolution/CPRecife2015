@@ -29,6 +29,8 @@ a, p { text-align: justify; font-family: robotoregular; }
 
 h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
 
+#header-menu p {font-family: robotothin !important; letter-spacing: 0.1em !important;}
+
 :focus { box-shadow: none !important}
 
 /* Campus Party header-menu */
@@ -151,3 +153,13 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
 }
 
 .filter-bar-hidden { right: -13em !important }
+
+#beacon-off  { text-align: center !important;}
+
+#beacon-on  { text-align: center !important;}
+
+#beacon-notify { text-align: center !important;}
+
+#beacon-off p { text-align: center !important;}
+
+#beacon-on p { text-align: center !important;}
