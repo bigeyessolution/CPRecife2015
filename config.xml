@@ -65,8 +65,8 @@
     <gap:plugin name="org.apache.cordova.splashscreen"/>
     <gap:plugin name="org.apache.cordova.vibration"/>
     <gap:plugin name="com.adobe.plugins.gaplugin"/>
+    <gap:plugin name="com.unarin.cordova.beacon" />
     <gap:plugin name="de.appplant.cordova.plugin.background-mode" />
-    <gap:plugin name="nl.x-services.plugins.ioswebviewcolor" />
     <allow-intent href="http://*/*"/>
     <allow-intent href="https://*/*"/>
     <allow-intent href="tel:*"/>

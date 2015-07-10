@@ -163,3 +163,20 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
 #beacon-off p { text-align: center !important;}
 
 #beacon-on p { text-align: center !important;}
+
+#page-schedule .ui-listview a {
+    background-image: url('../img/bg_agenda.png');
+    background-repeat: no-repeat;
+    background-position: 100% 0px;
+    background-color: rgba(84, 84, 84, 1.0);
+}
+
+#page-schedule .ui-listview li {
+    margin-top: 0.5em;
+}
+
+.ui-listview h2 {
+    font-family: robotothin;
+    color: #ffffff !important;
+    text-shadow: none !important;
+}

@@ -53,3 +53,6 @@ function showBeaconStausDiv () {
     $(divToShow).fadeIn();
 }
 
+function showScheduleByDay (day) {
+    $(':mobile-pagecontainer').pagecontainer("change", "#page-schedule-by-stage");
+}
