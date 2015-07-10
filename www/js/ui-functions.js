@@ -21,6 +21,8 @@ function prepareUI () {
     $("[data-role='navbar']").navbar();
     $("#header-menu").toolbar();
     
+    $('.btn-to-top').hide();
+    
     $("#beacon-on, #beacon-notify, #beacon-off").hide();
 }
 
@@ -55,4 +57,12 @@ function showBeaconStausDiv () {
 
 function showScheduleByDay (day) {
     $(':mobile-pagecontainer').pagecontainer("change", "#page-schedule-by-stage");
+}
+
+function toggleScheduleFilterBar() {
+    if ( $('#schedule-filter-bar').hasClass('filter-bar-hidden') ) {
+        $('#schedule-filter-bar').removeClass('filter-bar-hidden');
+    } else {
+        $('#schedule-filter-bar').addClass('filter-bar-hidden');
+    }
 }

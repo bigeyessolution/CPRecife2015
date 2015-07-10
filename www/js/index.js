@@ -48,6 +48,30 @@ BigEyesSolutionApp.addjQueryEvent(
         }
 });
 
+BigEyesSolutionApp.addjQueryEvent('.btn-to-top', 'click', function () {
+    $('html, body').animate({ scrollTop: $(":mobile-pagecontainer").offset().top }, 1000);
+});
+
+BigEyesSolutionApp.addjQueryEvent(".animateMe .ui-collapsible-heading-toggle", 'click', function (e) {
+    var current = $(this).closest(".ui-collapsible");             
+    if (current.hasClass("ui-collapsible-collapsed")) {
+        //collapse all others and then expand this one
+        $(".ui-collapsible").not(".ui-collapsible-collapsed").find(".ui-collapsible-heading-toggle").click();
+        $(".ui-collapsible-content", current).slideDown(500);
+    } else {
+        $(".ui-collapsible-content", current).slideUp(500);
+    }
+});
+
+BigEyesSolutionApp.addjQueryEvent(document, 'scroll', function () {
+    var activePage = $(":mobile-pagecontainer").pagecontainer( "getActivePage" ).attr("id");
+    if ($(window).scrollTop() > 100) {
+        $('#' + activePage + ' .btn-to-top').fadeIn(500);
+    } else {
+        $('#' + activePage + ' .btn-to-top').fadeOut(500);
+    }
+});
+
 /**
  * Execute task when device status is ready.
  * @returns {undefined}

@@ -25,13 +25,35 @@ body {
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
 }
 
-a, p { text-align: justify; font-family: robotoregular; }
+a, p, li { text-align: justify; font-family: robotoregular; }
 
 h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
 
 #header-menu p {font-family: robotothin !important; letter-spacing: 0.1em !important;}
 
 :focus { box-shadow: none !important}
+
+.ui-input-search {
+    width: 98%;
+    height: 2em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-top: 0;
+    margin-left: -16px !important;
+    border-radius: 2px;
+}
+
+.btn-to-top {
+    position: fixed;
+    float: right;
+    bottom: 2em;
+    right: 1em;
+    width: 3em;
+    height: 3em;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: #666666 0px 0px 10px;
+}
 
 /* Campus Party header-menu */
 #header-menu { 
@@ -82,22 +104,41 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
 }
 
 /* Campus Party colors */
-.cp-bg-earth    { background-color: #288ED6 !important }
-.cp-bg-moon     { background-color: #20508E !important }
-.cp-bg-jupter   { background-color: #724C7B !important }
-.cp-bg-venus    { background-color: #943E61 !important }
-.cp-bg-mars     { background-color: #EE872A !important }
-.cp-bg-saturn   { background-color: #89BA4D !important }
-.cp-bg-workshop { background-color: #2F86A0 !important }
-.cp-bg-startupmakers { background-color: #2F86A0 !important }
+.ui-content ul .ui-btn {
+    background-repeat: no-repeat !important;
+    background-position: right center;
+    padding: 1.2em;
+}
 
-.cp-bg-main { background-color: #0099ff !important; }
-.cp-bg-innovation { background-color: #005298 !important; }
-.cp-bg-creativity { background-color: #de1c85 !important; }
-.cp-bg-digital-ent { background-color: #ff5a00 !important; }
-.cp-bg-developers { background-color: #77216E !important; }
-.cp-bg-freesoftware { background-color: #1f9eb7 !important; }
-.cp-bg-science { background-color: #2eb135; }
+.cp-bg-earth, .cp-bg-earth .ui-btn { background-color: #3399ff !important }
+#page-schedule-by-stage .cp-bg-earth .ui-btn { background-image: url(../img/bg_terra.png); }
+.cp-bg-moon, .cp-bg-moon .ui-btn { background-color: #003399 !important }
+#page-schedule-by-stage .cp-bg-moon .ui-btn { background-image: url(../img/bg_lua.png); }
+.cp-bg-jupter, .cp-bg-jupter .ui-btn { background-color: #8f468b !important }
+#page-schedule-by-stage .cp-bg-jupter .ui-btn { background-image: url(../img/bg_jupiter.png); }
+.cp-bg-venus, .cp-bg-venus .ui-btn { background-color: #b80168 !important }
+#page-schedule-by-stage .cp-bg-venus .ui-btn { background-image: url(../img/bg_venus.png); }
+.cp-bg-mars, .cp-bg-mars .ui-btn { background-color: #f7a100 !important }
+#page-schedule-by-stage .cp-bg-mars .ui-btn { background-image: url(../img/bg_marte.png); }
+.cp-bg-saturn, .cp-bg-saturn .ui-btn { background-color: #6ebb27 !important }
+#page-schedule-by-stage .cp-bg-saturn .ui-btn { background-image: url(../img/bg_saturno.png); }
+.cp-bg-startupmakers, .cp-bg-startupmakers .ui-btn { background-color: #339999 !important }
+.cp-bg-ws-startupmakers, .cp-ws-bg-startupmakers .ui-btn { background-color: #336666 !important }
+.cp-bg-workshop-i, .cp-bg-workshop-i .ui-btn { background-color: #999999 !important }
+.cp-bg-workshop-ii, .cp-bg-workshop-ii .ui-btn { background-color: #666666 !important }
+.cp-bg-digital-inclusion-i, .cp-bg-digital-inclusion-i .ui-btn { background-color: #ffcc00 !important }
+.cp-bg-digital-inclusion-ii, .cp-bg-digital-inclusion-ii .ui-btn { background-color: #ebae08 !important }
+.cp-bg-bycommunity, .cp-bg-bycommunity .ui-btn { background-color: #9999cc !important }
+
+.cp-bg-main, .cp-bg-main .ui-btn { background-color: #0099ff !important; }
+.cp-bg-innovation, .cp-bg-innovation .ui-btn { background-color: #005298 !important; }
+.cp-bg-creativity, .cp-bg-creativity .ui-btn { background-color: #de1c85 !important; }
+.cp-bg-digital-ent, .cp-bg-digital-ent .ui-btn { background-color: #ff5a00 !important; }
+.cp-bg-developers, .cp-bg-developers .ui-btn { background-color: #77216E !important; }
+.cp-bg-freesoftware, .cp-bg-freesoftware .ui-btn { background-color: #1f9eb7 !important; }
+.cp-bg-science, .cp-bg-science .ui-btn { background-color: #2eb135; }
+
+
 
 .cp-bg-activities-1 {}
 .cp-bg-activities-2 {}
@@ -136,7 +177,7 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
     height: 3em;
     width: 15em;
     top: 10em;
-    right: -12em;
+    right: 0em;
     background: #fff;
     border-radius: 0.5em 0 0 0.5em;
     box-shadow: #898b8c 0px 1px 5px
@@ -152,7 +193,6 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
 #btn-show-schedule-filter-bar {
 }
 
-.filter-bar-hidden { right: -13em !important }
 
 #beacon-off  { text-align: center !important;}
 
@@ -164,10 +204,17 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
 
 #beacon-on p { text-align: center !important;}
 
+
+/* schedule pages*/
+.filter-bar-hidden { right: -13em !important }
+
+.ui-listview h1, .ui-listview h2, .ui-listview h3, .ui-listview h4 {
+    font-family: robotothin;
+    text-shadow: none !important;
+}
+
 #page-schedule .ui-listview a {
-    background-image: url('../img/bg_agenda.png');
-    background-repeat: no-repeat;
-    background-position: 100% 0px;
+    background-image: url('../img/bg_terra2.png');
     background-color: rgba(84, 84, 84, 1.0);
 }
 
@@ -175,8 +222,18 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
     margin-top: 0.5em;
 }
 
-.ui-listview h2 {
-    font-family: robotothin;
-    color: #ffffff !important;
+#page-schedule .ui-listview h2 { color: #ffffff !important; }
+
+.ui-collapsible .ui-btn, .ui-collapsible .ui-btn:visited, 
+.ui-collapsible .ui-btn:hover, .ui-collapsible .ui-btn:active {
+    color: #ffffff;
     text-shadow: none !important;
 }
+
+#page-schedule-by-stage .ui-collapsible {
+    margin-bottom: 0.5em;
+}
+
+
+
+ul.ui-collapsible-set { padding: 0 !important; list-style-type: none !important; }
