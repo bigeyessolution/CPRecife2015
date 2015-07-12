@@ -97,8 +97,14 @@ var BigEyesSolutionApp = {
     getI18n: function () {
         return this.i18n === '' ? false : this.i18n;
     },
+    /**
+     * Return if the device is connected.
+     * 
+     * @TODO to implement connectivity test with cordova
+     * @returns {Boolean}
+     */
     isConnected: function () {
-        
+        return true;
     },
     enableBackgroundMode: function () {
         // Prevent the app from going to sleep in background

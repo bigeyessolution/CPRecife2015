@@ -15,15 +15,19 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * @author Laudivan Freire de Almeida <laudivan@bigeyessolution.com>
+ * @type ProximityMonitor
+ */
 var ProximityMonitor = {
-    beaconList: [],
+    beaconsList: [], // [uuid][major][minor] = data
     beaconRegions: [],
     beaconMonitoring: false,
-    init: function (listOfBeacons) {
+    init: function () {
         
     },
-    addBeacon: function (id, uuid, major, minor) {
-        
+    setBeaconsList: function (data) {
+        this.beaconsList = data; console.log(JSON.stringify(this.beaconsList));
     },
     clearBeacons: function () {
         
@@ -33,8 +37,11 @@ var ProximityMonitor = {
      * @param {Boolean} status
      * @returns {undefined}
      */
-    enableMonitoring: function (status) {
-        this.beaconMonitoring = status;
+    enableMonitoring: function () {
+        this.beaconMonitoring = true;
+    },
+    disableMonitoring: function () {
+        this.beaconMonitoring = false;
     },
     isMonitoring: function () {
         return this.beaconMonitoring;

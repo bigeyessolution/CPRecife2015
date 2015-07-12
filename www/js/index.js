@@ -72,11 +72,13 @@ BigEyesSolutionApp.addjQueryEvent(document, 'scroll', function () {
     }
 });
 
-ApiCache.addUrl('schedule', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/schedule/', 0, populateSchedulePage);
+ApiCache.addUrl('schedule', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/schedule/', 3600000, populateSchedulePage);
 
-ApiCache.addUrl('stages', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/stages/', 0, populateStagesPage);
+ApiCache.addUrl('stages', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/stages/', 3600000, populateStagesPage);
 
-ApiCache.addUrl('news', 'http://recife.campus-party.org/api/containerbox/?name=api-destaques', 0, populateNewsPage);
+ApiCache.addUrl('news', 'http://recife.campus-party.org/api/containerbox/?name=api-destaques', 600000, populateNewsPage);
+
+ApiCache.addUrl('beacons', 'cprecife.beacon.json', 0, function (cacheId, data) { ProximityMonitor.setBeaconsList(data); });
 
 /**
  * Execute task when device status is ready.

@@ -15,37 +15,111 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * 
+ * 
+ * @author Laudivan Freire de Almeida <laudivan@bigeyessolution.com>
+ * @type ApiCache
+ */
 var ApiCache = {
     urls: [],
+    init: function () {
+        //load cache
+        var localCache = window.localStorage.getItem('ApiCache');
+        
+        if (localCache) {
+            this.urls = JSON.parse(localCache);
+        }
+        
+        if(this.urls.length > 0 && BigEyesSolutionApp.isConnected()) {
+            this.updateAllCaches();
+        }
+    },
+    /**
+     * 
+     * @param {String} cacheId
+     * @param {String} url
+     * @param {Integer} timeToLive in milliseconds
+     * @param {Function} uiHandler function to run after get data from url.
+     * @returns {undefined}
+     */
     addUrl: function (cacheId, url, timeToLive, uiHandler) {
+        if (this.urls[cacheId]) return;
+        
         this.urls[cacheId] = {
             cacheId: cacheId,
             url: url,
             timeToLive: timeToLive,
-            lastUpdate: 0,
+            lastUpdate: (new Date()).getTime(),
             uiHandler: uiHandler, // function (cacheId, data)
             content: {}
         };
         
         this.updateCache(cacheId);
     },
-    getContent: function (cacheId) {
-        //Get local content
-        //
-        //If timeToLive expires updateCache
+    /**
+     * 
+     * @param {String} cacheId
+     * @returns {Object}
+     */
+    getCache: function (cacheId) {
+        return this.urls[cacheId];
     },
-    updateCache: function (cacheId) {
-        //verify network connection
-        var cache = this.urls[cacheId];
+    /**
+     * 
+     * @param {String} cacheId
+     * @returns {Array|Object}
+     */
+    getContent: function (cacheId) {
+        return this.urls[cacheId].content;
+    },
+    /**
+     * 
+     * @param {String} cacheId
+     * @param {Array|Object} data
+     * @returns {undefined}
+     */
+    setContent: function (cacheId, data) {
+        this.urls[cacheId].content = data;
         
-        function _getHandler (data) {
-            if(cache.uiHandler) cache.uiHandler(cacheId, data);
+        window.localStorage.setItem('ApiCache', JSON.stringify(this.urls));
+    },
+    /**
+     * 
+     * @param {String} cacheId
+     * @returns {undefined}
+     */
+    updateCache: function (cacheId) {
+        var cache = this.getCache(cacheId);
+        
+        var time = (new Date()).getTime() - cache.lastUpdate;
+        
+        var flag = BigEyesSolutionApp.isConnected() && (time > cache.timeToLive);
+        
+        function _offLineHandler () {
+            if(cache.uiHandler) cache.uiHandler(cacheId, ApiCache.getContent(cacheId));
         }
         
-        $.getJSON(cache.url, _getHandler);
-        
+        if( flag ) {
+            function _onLineHandler (data) {
+                ApiCache.setContent(cacheId, data);                
+                
+                if(cache.uiHandler) cache.uiHandler(cacheId, data);
+            }
+
+            $.getJSON(cache.url, _onLineHandler).fail(_offLineHandler);
+        } else {
+            _offLineHandler();
+        }
     },
+    /**
+     * Updates all url's cache
+     * 
+     * @returns {undefined}
+     */
     updateAllCaches: function () {
-        
+        $.each(this.urls, function (cacheId, url) {
+            ApiCache.updateCache(cacheId);
+        });
     }
 }
