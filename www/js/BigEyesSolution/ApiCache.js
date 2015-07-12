@@ -17,19 +17,32 @@
 
 var ApiCache = {
     urls: [],
-    addUrl: function (cacheId, url, timeToLive) {
+    addUrl: function (cacheId, url, timeToLive, uiHandler) {
         this.urls[cacheId] = {
             cacheId: cacheId,
             url: url,
             timeToLive: timeToLive,
+            lastUpdate: 0,
+            uiHandler: uiHandler, // function (cacheId, data)
             content: {}
         };
+        
+        this.updateCache(cacheId);
     },
     getContent: function (cacheId) {
         //Get local content
+        //
         //If timeToLive expires updateCache
     },
     updateCache: function (cacheId) {
+        //verify network connection
+        var cache = this.urls[cacheId];
+        
+        function _getHandler (data) {
+            if(cache.uiHandler) cache.uiHandler(cacheId, data);
+        }
+        
+        $.getJSON(cache.url, _getHandler);
         
     },
     updateAllCaches: function () {

@@ -72,6 +72,12 @@ BigEyesSolutionApp.addjQueryEvent(document, 'scroll', function () {
     }
 });
 
+ApiCache.addUrl('schedule', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/schedule/', 0, populateSchedulePage);
+
+ApiCache.addUrl('stages', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/stages/', 0, populateStagesPage);
+
+ApiCache.addUrl('news', 'http://recife.campus-party.org/api/containerbox/?name=api-destaques', 0, populateNewsPage);
+
 /**
  * Execute task when device status is ready.
  * @returns {undefined}

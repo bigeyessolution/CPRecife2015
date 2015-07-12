@@ -66,3 +66,15 @@ function toggleScheduleFilterBar() {
         $('#schedule-filter-bar').addClass('filter-bar-hidden');
     }
 }
+
+function populateStagesPage (cacheId, data) {
+    
+}
+
+function populateNewsPage (cacheId, data) {
+    
+}
+
+function populateSchedulePage (cacheId, data) {
+    
+}
