@@ -44,18 +44,29 @@ var ApiCache = {
      * @returns {undefined}
      */
     addUrl: function (cacheId, url, timeToLive, uiHandler) {
-        if (this.urls[cacheId]) return;
+        for (var index = 0; index <  this.urls.length; index ++) {
+            if (this.urls[index].cacheId == cacheId) {
+                this.urls[index].timeToLive = timeToLive;
+                this.urls[index].uiHandler = uiHandler;
+                return;
+            }
+        }
         
-        this.urls[cacheId] = {
+        this.urls.push({
             cacheId: cacheId,
             url: url,
             timeToLive: timeToLive,
             lastUpdate: (new Date()).getTime(),
             uiHandler: uiHandler, // function (cacheId, data)
             content: {}
-        };
-        
-        this.updateCache(cacheId);
+        });
+    },
+    hasCacheId: function (cacheId) {
+        for (var index = 0; index <  this.urls.length; index ++) {
+           if (this.urls[index].cacheId == cacheId) return true;
+        }
+       
+       return false;
     },
     /**
      * 
@@ -63,15 +74,11 @@ var ApiCache = {
      * @returns {Object}
      */
     getCache: function (cacheId) {
-        return this.urls[cacheId];
-    },
-    /**
-     * 
-     * @param {String} cacheId
-     * @returns {Array|Object}
-     */
-    getContent: function (cacheId) {
-        return this.urls[cacheId].content;
+        for (var index = 0; index <  this.urls.length; index ++) {
+            if (this.urls[index].cacheId == cacheId) return this.urls[index];
+        }
+        
+        return false;
     },
     /**
      * 
@@ -80,7 +87,12 @@ var ApiCache = {
      * @returns {undefined}
      */
     setContent: function (cacheId, data) {
-        this.urls[cacheId].content = data;
+        for (var index = 0; index <  this.urls.length; index ++) {
+            if (this.urls[index].cacheId == cacheId) {
+                this.urls[index].content = data;
+                break;
+            }
+        }
         
         window.localStorage.setItem('ApiCache', JSON.stringify(this.urls));
     },
@@ -97,7 +109,8 @@ var ApiCache = {
         var flag = BigEyesSolutionApp.isConnected() && (time > cache.timeToLive);
         
         function _offLineHandler () {
-            if(cache.uiHandler) cache.uiHandler(cacheId, ApiCache.getContent(cacheId));
+            console.log(JSON.stringify(cache.content))
+            if(cache.uiHandler) cache.uiHandler(cacheId, cache.content);
         }
         
         if( flag ) {
@@ -106,7 +119,7 @@ var ApiCache = {
                 
                 if(cache.uiHandler) cache.uiHandler(cacheId, data);
             }
-
+            
             $.getJSON(cache.url, _onLineHandler).fail(_offLineHandler);
         } else {
             _offLineHandler();
@@ -118,8 +131,20 @@ var ApiCache = {
      * @returns {undefined}
      */
     updateAllCaches: function () {
-        $.each(this.urls, function (cacheId, url) {
-            ApiCache.updateCache(cacheId);
+        $.each(this.urls, function (index, cache) {
+//            ApiCache.updateCache(url.cacheId);
+
+            var flag = BigEyesSolutionApp.isConnected() && (time > cache.timeToLive);
+
+            if (!flag) return;
+
+            var time = (new Date()).getTime() - cache.lastUpdate;
+            
+            function _onLineHandler (data) {
+                ApiCache.setContent(cacheId, data);
+            }
+            
+            $.getJSON(cache.url, _onLineHandler);
         });
     }
 }

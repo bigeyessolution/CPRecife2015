@@ -21,6 +21,17 @@ function prepareUI () {
     $("[data-role='navbar']").navbar();
     $("#header-menu").toolbar();
     
+    $(".animateMe .ui-collapsible-heading-toggle").click(function (e) {
+        var current = $(this).closest(".ui-collapsible");             
+        if (current.hasClass("ui-collapsible-collapsed")) {
+            //collapse all others and then expand this one
+            $(".ui-collapsible").not(".ui-collapsible-collapsed").find(".ui-collapsible-heading-toggle").click();
+            $(".ui-collapsible-content", current).slideDown(500);
+        } else {
+            $(".ui-collapsible-content", current).slideUp(500);
+        }
+    });
+    
     $('.btn-to-top').hide();
     
     $("#beacon-on, #beacon-notify, #beacon-off").hide();
@@ -55,7 +66,11 @@ function showBeaconStausDiv () {
     $(divToShow).fadeIn();
 }
 
+var _dateFilter = new Date (2015, 07, 23);
+
 function showScheduleByDay (day) {
+    _dayFilter = day;
+    
     $(':mobile-pagecontainer').pagecontainer("change", "#page-schedule-by-stage");
 }
 
@@ -75,6 +90,56 @@ function populateNewsPage (cacheId, data) {
     
 }
 
+function getListIdToStage (stage_slug) {
+    switch (stage_slug) {
+        case 'PalcoVenusCPRec4':
+            return '#schedule-list-venus';
+        case 'PalcoLuaCPRec4':
+            return '#schedule-list-lua';
+        case 'PalcoTerraCPRec4':
+            return '#schedule-list-terra';
+        case 'PalcoMarteCPRec4':
+            return '#schedule-list-marte';
+        case 'PalcoJupiterCPRecife':
+            return '#schedule-list-jupter';
+        case 'PalcoSaturnoCPRec4':
+            return '#schedule-list-saturno';
+        case 'Workshop1CienciaCPRecife4':
+            return '#schedule-list-workshop-i';
+        case 'Workshop2inovacaoCPRecife4':
+            return '#schedule-list-workshop-ii';
+        case 'PalcoStartupMakersCampCPRecife4':
+            return '#schedule-list-startupmakers';
+        case 'WorkshopStartupMakersCampCPRecife4':
+            return '#schedule-list-ws-startupmakers';
+        case 'InclusaoDigitalICPRecife4':
+            return '#schedule-list-digital-inclusion-i';
+        case 'InclusaoDigitalIICPRecife4':
+            return '#schedule-list-digital-inclusion-ii';
+        case 'ConteudosbyComunidadesCPRecife4':
+            return '#schedule-list-bycommunity';
+    }
+}
+
 function populateSchedulePage (cacheId, data) {
+    $(".be-schedule-list").empty();
     
+    for (var index = 0; index < data.length; index ++) {
+        var aux = data[index].date.split(" ");
+        var aux_date = aux[0].split("-");
+        
+        if( aux_date[2] != _dayFilter ) continue;
+                
+        var aux_hour = aux[1].split(":");
+        
+        var date = new Date (data[index].date);
+        
+//        var h = date.getHours().toString();
+//        var m = date.getMinutes() < 10 ? "0" + date.getMinutes().toString(): date.getMinutes().toString();
+        
+        $("<li><h3>" + data[index].title + "</h3><p>" + aux_hour[0] + ":" + aux_hour[1] + "</p></li>")
+        .appendTo(getListIdToStage(data[index].stage_slug));
+    }
+    
+    $(".be-schedule-list").listview("refresh");
 }

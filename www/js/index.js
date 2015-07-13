@@ -26,6 +26,21 @@ BigEyesSolutionApp.addjQueryEvent(
     ':mobile-pagecontainer', 'pagecontainerbeforechange', function (event, ui) {
         var prevPage = ui.prevPage.attr("id");
         
+        switch (prevPage) {
+            case 'page-schedule':
+                break;
+            case 'page-schedule-by-stage':
+                $("#page-schedule-by-stage .ui-collapsible").collapsible("collapse");
+                break;
+            case 'page-news':
+                break;
+            case 'page-beacon':
+                showBeaconStausDiv();
+                break;
+            case 'page-abount':
+                break;
+        }
+        
 });
 
 BigEyesSolutionApp.addjQueryEvent(
@@ -36,7 +51,8 @@ BigEyesSolutionApp.addjQueryEvent(
         switch (toPage) {
             case 'page-schedule':
                 break;
-            case 'page-schedule-by-day':
+            case 'page-schedule-by-stage':
+                    ApiCache.updateCache('schedule');
                 break;
             case 'page-news':
                 break;
@@ -48,19 +64,16 @@ BigEyesSolutionApp.addjQueryEvent(
         }
 });
 
-BigEyesSolutionApp.addjQueryEvent('.btn-to-top', 'click', function () {
-    $('html, body').animate({ scrollTop: $(":mobile-pagecontainer").offset().top }, 1000);
+BigEyesSolutionApp.addjQueryEvent('#search-stage', 'focusin', function () { 
+    $('#page-schedule-by-stage .ui-footer').hide();
 });
 
-BigEyesSolutionApp.addjQueryEvent(".animateMe .ui-collapsible-heading-toggle", 'click', function (e) {
-    var current = $(this).closest(".ui-collapsible");             
-    if (current.hasClass("ui-collapsible-collapsed")) {
-        //collapse all others and then expand this one
-        $(".ui-collapsible").not(".ui-collapsible-collapsed").find(".ui-collapsible-heading-toggle").click();
-        $(".ui-collapsible-content", current).slideDown(500);
-    } else {
-        $(".ui-collapsible-content", current).slideUp(500);
-    }
+BigEyesSolutionApp.addjQueryEvent('#search-stage', 'focusout', function () { 
+    $('#page-schedule-by-stage .ui-footer').fadeIn();
+});
+
+BigEyesSolutionApp.addjQueryEvent('.btn-to-top', 'click', function () {
+    $('html, body').animate({ scrollTop: $(":mobile-pagecontainer").offset().top }, 1000);
 });
 
 BigEyesSolutionApp.addjQueryEvent(document, 'scroll', function () {
@@ -72,13 +85,17 @@ BigEyesSolutionApp.addjQueryEvent(document, 'scroll', function () {
     }
 });
 
-ApiCache.addUrl('schedule', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/schedule/', 3600000, populateSchedulePage);
+ApiCache.init();
 
-ApiCache.addUrl('stages', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/stages/', 3600000, populateStagesPage);
+//ApiCache.addUrl('schedule', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/schedule/', 3600000, populateSchedulePage);
+ApiCache.addUrl('schedule', 'schedule.json', 0, populateSchedulePage);
 
-ApiCache.addUrl('news', 'http://recife.campus-party.org/api/containerbox/?name=api-destaques', 600000, populateNewsPage);
+//ApiCache.addUrl('stages', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/stages/', 3600000, populateStagesPage);
+//ApiCache.addUrl('news', 'http://recife.campus-party.org/api/containerbox/?name=api-destaques', 300000, populateNewsPage);
 
 ApiCache.addUrl('beacons', 'cprecife.beacon.json', 0, function (cacheId, data) { ProximityMonitor.setBeaconsList(data); });
+
+ApiCache.updateAllCaches();
 
 /**
  * Execute task when device status is ready.
