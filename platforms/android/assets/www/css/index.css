@@ -50,7 +50,12 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
     right: 1em;
     width: 3em;
     height: 3em;
-    background: #ffffff;
+    opacity: 0.6;
+    background-color: #ffffff;
+    background-image: url(../js/jquerymobile/images/icons-svg/carat-u-black.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
     border-radius: 50%;
     box-shadow: #666666 0px 0px 10px;
 }
@@ -216,10 +221,12 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
 #page-schedule .ui-listview a {
     background-image: url('../img/bg_terra2.png');
     background-color: rgba(84, 84, 84, 1.0);
+    padding: 1.8em 1em;
+    font-size: 1.2em;
 }
 
 #page-schedule .ui-listview li {
-    margin-top: 0.5em;
+    margin-top: 0.8em;
 }
 
 #page-schedule .ui-listview h2 { color: #ffffff !important; }

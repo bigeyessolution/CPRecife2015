@@ -126,16 +126,18 @@ function populateSchedulePage (cacheId, data) {
     
     for (var index = 0; index < data.length; index ++) {
         var aux = data[index].date.split(" ");
+        var aux_date = aux[0].split("-");
         
-        var date_aux = aux[0].split("-");
-        
-        if( date_aux[2] != _dayFilter ) continue;
+        if( aux_date[2] != _dayFilter ) continue;
                 
-        var date = new Date (data[index].date);
-        var h = date.getHours();
-        var m = date.getMinutes() > 10 ? "0" + date.getMinutes(): date.getMinutes();
+        var aux_hour = aux[1].split(":");
         
-        $("<li><h3>" + data[index].title + "</h3><p>" + h + ":" + m + "</p></li>")
+        var date = new Date (data[index].date);
+        
+//        var h = date.getHours().toString();
+//        var m = date.getMinutes() < 10 ? "0" + date.getMinutes().toString(): date.getMinutes().toString();
+        
+        $("<li><h3>" + data[index].title + "</h3><p>" + aux_hour[0] + ":" + aux_hour[1] + "</p></li>")
         .appendTo(getListIdToStage(data[index].stage_slug));
     }
     

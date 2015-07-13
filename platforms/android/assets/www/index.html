@@ -31,8 +31,9 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
         <meta charset="UTF-8">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="js/jquerymobile/jquery.mobile.structure-1.4.5.css">
+        <link rel="stylesheet" type="text/css" href="js/jquerymobile/jquery.mobile.inline-svg-1.4.5.css">
+        <link rel="stylesheet" type="text/css" href="js/jquerymobile/cprecife.css">
         <link rel="stylesheet" type="text/css" href="css/Roboto/stylesheet.css">
-        <link rel="stylesheet" type="text/css" href="css/cprecife.css">
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <script type="text/javascript" src="js/jquery/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/jquerymobile/jquery.mobile-1.4.5.js"></script>
@@ -84,9 +85,11 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
                     <li data-icon="false"><a onclick="showScheduleByDay(25)">
                         <h2>25 de julho de 2015</h2>
                     </a></li>
+                    <!--
                     <li data-icon="false"><a onclick="showScheduleByDay(26)">
                         <h2>26 de julho de 2015</h2>
                     </a></li>
+                    -->
                 </ul>
             </div>
         </section> <!-- end #page-schedule -->
@@ -101,11 +104,7 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
                 <ul data-role="collapsibleset" data-inset="false" data-collapsed-icon="false" data-expanded-icon="false" data-filter="true" data-input="#search-stage">
                     <li data-role="collapsible" class="animateMe">
                         <h3 class="cp-bg-earth">Palco Terra</h3>
-                        <ul id="schedule-list-terra" class="be-schedule-list" data-role="listview" data-inset="false" data-filter="true" data-input="#search-stage">
-                            <li><h3>Eu só uso software livre com windows, office, ...</h3><p>Laudivan</p><p>14:00 - 15:00</p></li>
-                            <li><h3>Tópico Billgateanos</h3><p>Washington</p><p>14:00 - 15:00</p></li>
-                            <li><h3>Ensaio sobre o Lanterna Verde</h3><p>Fabão</p><p>14:00 - 15:00</p></li>
-                        </ul>
+                        <ul id="schedule-list-terra" class="be-schedule-list" data-role="listview" data-inset="false" data-filter="true" data-input="#search-stage"></ul>
                     </li>
                     <li data-role="collapsible" class="animateMe">
                         <h3 class="cp-bg-jupter">Palco Júpiter</h3>
@@ -174,6 +173,7 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
             <div role="main" class="ui-content">
                 
             </div>
+            <a class="btn-to-top"></a>
         </section> <!-- end #page-news -->
         
         <section id="page-beacon" data-role="page">
@@ -225,6 +225,7 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
                     </select>
                 </div>
             </div>
+            <a class="btn-to-top"></a>
         </section> <!-- end #page-beacon -->
         
         <section id="page-about" data-role="page">
@@ -311,6 +312,7 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
                 </div>
                 
             </div>
+            <a class="btn-to-top"></a>
         </section> <!-- end #page-about -->
     </body>
 </html>

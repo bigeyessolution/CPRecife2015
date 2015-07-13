@@ -88,7 +88,10 @@ var ApiCache = {
      */
     setContent: function (cacheId, data) {
         for (var index = 0; index <  this.urls.length; index ++) {
-            if (this.urls[index].cacheId == cacheId) this.urls[index].content = data;
+            if (this.urls[index].cacheId == cacheId) {
+                this.urls[index].content = data;
+                break;
+            }
         }
         
         window.localStorage.setItem('ApiCache', JSON.stringify(this.urls));
@@ -105,7 +108,8 @@ var ApiCache = {
         
         var flag = BigEyesSolutionApp.isConnected() && (time > cache.timeToLive);
         
-        function _offLineHandler () { console.log("Offline")
+        function _offLineHandler () {
+            console.log(JSON.stringify(cache.content))
             if(cache.uiHandler) cache.uiHandler(cacheId, cache.content);
         }
         

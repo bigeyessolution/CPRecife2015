@@ -64,6 +64,14 @@ BigEyesSolutionApp.addjQueryEvent(
         }
 });
 
+BigEyesSolutionApp.addjQueryEvent('#search-stage', 'focusin', function () { 
+    $('#page-schedule-by-stage .ui-footer').hide();
+});
+
+BigEyesSolutionApp.addjQueryEvent('#search-stage', 'focusout', function () { 
+    $('#page-schedule-by-stage .ui-footer').fadeIn();
+});
+
 BigEyesSolutionApp.addjQueryEvent('.btn-to-top', 'click', function () {
     $('html, body').animate({ scrollTop: $(":mobile-pagecontainer").offset().top }, 1000);
 });
@@ -80,7 +88,7 @@ BigEyesSolutionApp.addjQueryEvent(document, 'scroll', function () {
 ApiCache.init();
 
 //ApiCache.addUrl('schedule', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/schedule/', 3600000, populateSchedulePage);
-ApiCache.addUrl('schedule', 'schedule.json', 300000, populateSchedulePage);
+ApiCache.addUrl('schedule', 'schedule.json', 0, populateSchedulePage);
 
 //ApiCache.addUrl('stages', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/stages/', 3600000, populateStagesPage);
 //ApiCache.addUrl('news', 'http://recife.campus-party.org/api/containerbox/?name=api-destaques', 300000, populateNewsPage);
