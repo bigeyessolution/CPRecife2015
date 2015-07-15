@@ -24,10 +24,10 @@ var ProximityMonitor = {
     beaconRegions: [],
     beaconMonitoring: false,
     init: function () {
-        
+        this.beaconMonitoring = BigEyesSolutionApp.getConf("beaconmonitoring");
     },
     setBeaconsList: function (data) {
-        this.beaconsList = data; console.log(JSON.stringify(this.beaconsList));
+        this.beaconsList = data;
     },
     clearBeacons: function () {
         
@@ -39,9 +39,11 @@ var ProximityMonitor = {
      */
     enableMonitoring: function () {
         this.beaconMonitoring = true;
+        BigEyesSolutionApp.setConf("beaconmonitoring", true);
     },
     disableMonitoring: function () {
         this.beaconMonitoring = false;
+        BigEyesSolutionApp.setConf("beaconmonitoring", false);
     },
     isMonitoring: function () {
         return this.beaconMonitoring;

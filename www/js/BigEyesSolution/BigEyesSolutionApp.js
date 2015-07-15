@@ -25,6 +25,7 @@ var BigEyesSolutionApp = {
     backgroundTimer: false,
     i18n: 'pt',
     jQueryEvents: [],
+    conf: [],
     /**
      * Initialize the
      */
@@ -36,6 +37,17 @@ var BigEyesSolutionApp = {
 //        );
 
         //if is iOS: window.plugins.webviewcolor.change('#FFFFFF');
+        
+        var conf = window.localStorage.getItem('BigEyesConf');        
+        this.conf = conf ? JSON.parse(conf) : [];
+        
+        for (var index = 0; index < this.conf; index ++) {
+            if (this.conf[index].type == 'number') {
+                this.conf[index].value = Number(this.conf[index].value);
+            } else if (this.conf[index].type == 'boolean') {
+                this.conf[index].value = Boolean(this.conf[index].value);
+            }
+        }
     },
     /**
      * Verify if the applications is running with cordova environment.
@@ -117,6 +129,36 @@ var BigEyesSolutionApp = {
     },
     disableBackgroundMode: function () {
         
+    },
+    getConf: function (confName) {
+        for (var index=0; index < this.conf.length; index++) {
+            if (this.conf[index].name == confName) {
+                return this.conf[index].value;
+            }
+        }
+        
+        return false;
+    },
+    setConf: function (confName, value) {
+        var type = typeof value;
+        
+        for (var index=0; index < this.conf.length; index++) {
+            if (this.conf[index].name == confName) {
+                this.conf[index].type = type;
+                this.conf[index].value = value;
+                
+                window.localStorage.setItem("BigEyesConf", JSON.stringify(this.conf));
+                return;
+            }
+        }
+        
+        this.conf.push({
+            name: confName,
+            type: type,
+            value: value
+        });
+        
+        window.localStorage.setItem("BigEyesConf", JSON.stringify(this.conf));
     },
     successHandler: function (result) {
         

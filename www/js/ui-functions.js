@@ -71,6 +71,8 @@ var _dateFilter = new Date (2015, 07, 23);
 function showScheduleByDay (day) {
     _dayFilter = day;
     
+    $(".be-schedule-list").empty();
+    
     $(':mobile-pagecontainer').pagecontainer("change", "#page-schedule-by-stage");
 }
 
@@ -122,8 +124,6 @@ function getListIdToStage (stage_slug) {
 }
 
 function populateSchedulePage (cacheId, data) {
-    $(".be-schedule-list").empty();
-    
     for (var index = 0; index < data.length; index ++) {
         var aux = data[index].date.split(" ");
         var aux_date = aux[0].split("-");

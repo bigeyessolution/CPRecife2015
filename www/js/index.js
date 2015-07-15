@@ -18,7 +18,12 @@
 BigEyesSolutionApp.initialize();
 
 BigEyesSolutionApp.addjQueryEvent('#btn-beacon-sensor', 'change', function() {
-    ProximityMonitor.enableMonitoring(getBtnBeaconStatus());
+    if (getBtnBeaconStatus()) {
+        ProximityMonitor.enableMonitoring();
+    } else {
+        ProximityMonitor.disableMonitoring();
+    }
+    
     showBeaconStausDiv();
 });
 
@@ -85,15 +90,15 @@ BigEyesSolutionApp.addjQueryEvent(document, 'scroll', function () {
     }
 });
 
+ProximityMonitor.init();
+
 ApiCache.init();
 
-//ApiCache.addUrl('schedule', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/schedule/', 3600000, populateSchedulePage);
-ApiCache.addUrl('schedule', 'schedule.json', 0, populateSchedulePage);
+ApiCache.addUrl('schedule', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/schedule/', 3600, populateSchedulePage);
+//ApiCache.addUrl('stages', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/stages/', 3600, populateStagesPage);
+//ApiCache.addUrl('news', 'http://recife.campus-party.org/api/containerbox/?name=api-destaques', 3000, populateNewsPage);
 
-//ApiCache.addUrl('stages', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/stages/', 3600000, populateStagesPage);
-//ApiCache.addUrl('news', 'http://recife.campus-party.org/api/containerbox/?name=api-destaques', 300000, populateNewsPage);
-
-ApiCache.addUrl('beacons', 'cprecife.beacon.json', 0, function (cacheId, data) { ProximityMonitor.setBeaconsList(data); });
+ApiCache.addUrl('beacons', 'https://s3.amazonaws.com/cdn.campuse.ro/cprecife.beacon.json', 0, function (cacheId, data) { ProximityMonitor.setBeaconsList(data); });
 
 ApiCache.updateAllCaches();
 

@@ -1,94 +1,162 @@
-[
-
-    {
-        "stage_name": "Palco Venus CPRec4",
-        "stage_slug": "PalcoVenusCPRec4",
-        "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-        "major": 0,
-        "minor": 0
-    },
-    {
-        "stage_name": "Palco Lua CPRec4",
-        "stage_slug": "PalcoLuaCPRec4",
-        "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-        "major": 213,
-        "minor": 17780
-    },
-    {
-        "stage_name": "Palco Terra CPRec4",
-        "stage_slug": "PalcoTerraCPRec4",
-        "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-        "major": 213,
-        "minor": 2646
-    },
-    {
-        "stage_name": "Palco Marte CPRec4",
-        "stage_slug": "PalcoMarteCPRec4",
-        "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-        "major": 0,
-        "minor": 0
-    },
-    {
-        "stage_name": "Palco Jupiter CPRec4",
-        "stage_slug": "PalcoJupiterCPRecife",
-        "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-        "major": 0,
-        "minor": 0
-    },
-    {
-        "stage_name": "Palco Saturno CPRec4",
-        "stage_slug": "PalcoSaturnoCPRec4",
-        "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-        "major": 0,
-        "minor": 0
-    },
-    {
-        "stage_name": "Workshop I Ciencia CPRecife4",
-        "stage_slug": "Workshop1CienciaCPRecife4",
-        "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-        "major": 0,
-        "minor": 0
-    },
-    {
-        "stage_name": "Workshop II Inovaçao CPRecife4",
-        "stage_slug": "Workshop2inovacaoCPRecife4",
-        "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-        "major": 0,
-        "minor": 0
-    },
-    {
-        "stage_name": "Startup&Makers Camp CPRecife4",
-        "stage_slug": "PalcoStartupMakersCampCPRecife4",
-        "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-        "major": 0,
-        "minor": 0
-    },
-    {
-        "stage_name": "Workshop Startup&Makers Camp CPRecife4",
-        "stage_slug": "WorkshopStartupMakersCampCPRecife4",
-        "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-        "major": 0,
-        "minor": 0
-    },
-    {
-        "stage_name": "Inclusao Digital I CPRecife4",
-        "stage_slug": "InclusaoDigitalICPRecife4",
-        "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-        "major": 0,
-        "minor": 0
-    },
-    {
-        "stage_name": "Inclusao Digital II CPRecife4",
-        "stage_slug": "InclusaoDigitalIICPRecife4",
-        "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-        "major": 0,
-        "minor": 0
-    },
-    {
-        "stage_name": "Conteúdos by Comunidades CPRecife4",
-        "stage_slug": "ConteudosbyComunidadesCPRecife4",
-        "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-        "major": 0,
-        "minor": 0
-    }
-]
+{
+    "lastupdate": 1436994219,
+    "info_to_url": "",
+    "beacons": [
+        {
+            "place_id": 1,
+            "place_description": "",
+            "place_type": "stage", 
+            "stage_name": "Palco Terra CPRec4",
+            "stage_slug": "PalcoTerraCPRec4",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 213,
+            "minor": 2646
+        },
+        {
+            "place_id": 1,
+            "place_description": "",
+            "place_type": "stage", 
+            "stage_name": "Palco Terra CPRec4",
+            "stage_slug": "PalcoTerraCPRec4",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 0,
+            "minor": 0
+        },
+        {
+            "place_id": 2,
+            "place_description": "",
+            "place_type": "stage",
+            "stage_name": "Palco Jupiter CPRec4",
+            "stage_slug": "PalcoJupiterCPRecife",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 0,
+            "minor": 0
+        },
+        {
+            "place_id": 3,
+            "place_description": "",
+            "place_type": "stage",
+            "stage_name": "Palco Marte CPRec4",
+            "stage_slug": "PalcoMarteCPRec4",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 0,
+            "minor": 0
+        },
+        {
+            "place_id": 4,
+            "place_description": "",
+            "place_type": "stage",
+            "stage_name": "Palco Lua CPRec4",
+            "stage_slug": "PalcoLuaCPRec4",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 213,
+            "minor": 17780
+        },
+        {
+            "place_id": 5,
+            "place_description": "",
+            "place_type": "stage",
+            "stage_name": "Palco Saturno CPRec4",
+            "stage_slug": "PalcoSaturnoCPRec4",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 0,
+            "minor": 0
+        },
+        {
+            "place_id": 6,
+            "place_description": "",
+            "place_type": "stage",
+            "stage_name": "Palco Venus CPRec4",
+            "stage_slug": "PalcoVenusCPRec4",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 0,
+            "minor": 0
+        },
+        {
+            "place_id": 7,
+            "place_description": "",
+            "place_type": "stage",
+            "stage_name": "Workshop I Ciencia CPRecife4",
+            "stage_slug": "Workshop1CienciaCPRecife4",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 0,
+            "minor": 0
+        },
+        {
+            "place_id": 8,
+            "place_description": "",
+            "place_type": "stage",
+            "stage_name": "Workshop II Inovaçao CPRecife4",
+            "stage_slug": "Workshop2inovacaoCPRecife4",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 0,
+            "minor": 0
+        },
+        {
+            "place_id": 9,
+            "place_description": "",
+            "place_type": "stage",
+            "stage_name": "Startup&Makers Camp CPRecife4",
+            "stage_slug": "PalcoStartupMakersCampCPRecife4",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 0,
+            "minor": 0
+        },
+        {
+            "place_id": 10,
+            "place_description": "",
+            "place_type": "stage",
+            "stage_name": "Workshop Startup&Makers Camp CPRecife4",
+            "stage_slug": "WorkshopStartupMakersCampCPRecife4",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 0,
+            "minor": 0
+        },
+        {
+            "place_id": 11,
+            "place_description": "",
+            "place_type": "stage",
+            "stage_name": "Inclusao Digital I CPRecife4",
+            "stage_slug": "InclusaoDigitalICPRecife4",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 0,
+            "minor": 0
+        },
+        {
+            "place_id": 12,
+            "place_description": "",
+            "place_type": "stage",
+            "stage_name": "Inclusao Digital II CPRecife4",
+            "stage_slug": "InclusaoDigitalIICPRecife4",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 0,
+            "minor": 0
+        },
+        {
+            "place_id": 13,
+            "place_description": "",
+            "place_type": "stage",
+            "stage_name": "Conteúdos by Comunidades CPRecife4",
+            "stage_slug": "ConteudosbyComunidadesCPRecife4",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 0,
+            "minor": 0
+        },
+        {
+            "place_id": 14,
+            "place_description": "Restaurante",
+            "place_type": "other",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 0,
+            "minor": 0
+        },
+        {
+            "place_id": 15,
+            "place_description": "Camping",
+            "place_type": "other",
+            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "major": 0,
+            "minor": 0
+        }
+    ]
+}

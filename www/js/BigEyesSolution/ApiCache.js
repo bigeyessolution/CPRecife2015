@@ -109,7 +109,6 @@ var ApiCache = {
         var flag = BigEyesSolutionApp.isConnected() && (time > cache.timeToLive);
         
         function _offLineHandler () {
-            console.log(JSON.stringify(cache.content))
             if(cache.uiHandler) cache.uiHandler(cacheId, cache.content);
         }
         
@@ -120,7 +119,12 @@ var ApiCache = {
                 if(cache.uiHandler) cache.uiHandler(cacheId, data);
             }
             
-            $.getJSON(cache.url, _onLineHandler).fail(_offLineHandler);
+            //Mostrar loading
+            $.getJSON(cache.url, _onLineHandler).fail(_offLineHandler)
+            .done (function () {
+                //esconder loading
+            });
+    
         } else {
             _offLineHandler();
         }
