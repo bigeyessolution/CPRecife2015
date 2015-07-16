@@ -26,6 +26,7 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
                 * Enable inline JS: add 'unsafe-inline' to default-src
         <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
         -->
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta charset="UTF-8">
@@ -171,7 +172,7 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
             </div>
             
             <div role="main" class="ui-content speakers">
-                <span class="speakres_span">Magistrais, destaques e curadores.</span>
+                <span class="speakres_span">Magistrais, destaques e curadores.</span><br>
                 <img class="speakres_img" src="img/speakers/Lorrana_Scarpioni-M.png"></br>
                 <span class="speakres_name">Lorrana Scarpioni</span>
                 <img class="speakres_img" src="img/speakers/Lorrana_Scarpioni-M.png"></br>
@@ -190,47 +191,26 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
             </div>
             
             <div role="main" class="ui-content">
-                <div id="beacon-on" class="ui-body">
-                    <img src="img/img-beacon-on.png" alt="Beacon On" style="width: 70%; height: auto;">         
+                <div class="ui-body" style="text-align: center">
+                    <img src="img/img-beacon-on.png" alt="Beacon On" style="width: 60%; height: auto;">         
+                    <ul id="beacon-notifications" data-role="listview" data-inset="true">
+                        <li data-icon="false">
+                            <h1>Titulo da primeira palestra</h1>
+                            <h2>Palestrante</h2>
+                        </li>
+                        <li data-icon="false">
+                            <h2>Titulo da segunda palestra</h2>
+                        </li>
+                        <li data-icon="false">
+                            <h2>Titulo da terceira palestra</h2>
+                        </li>
+                    </ul>
                     <h2>Saiba o que est&#225; rolando nos palcos.</h2>
                     <p>
                         A CP Recife 2015 traz essa novidade para voc&#234;: 
                         basta passar em frente ao palco para saber qual &eacute; 
                         a palestra.
                     </p>
-                </div>   
-                
-                <div id="beacon-off" class="ui-body">
-                    <img src="img/img-beacon-off.png" alt="Beacon On" style="width: 80%; height: auto;">         
-                    <h2>Quer ficar sabendo o que est&#225; rolando em cada palco?</h2>
-                    <p>Ative o sensor de proximidade.</p>
-                </div>   
-                
-                <div id="beacon-notify" class="ui-body">
-                    <img src="img/img-beacon-notify.png" alt="Beacon On" style="width: 80%; height: auto;">
-                    <div class="ui-body">                        
-                        <ul id="beacon-notifications" data-role="listview" data-inset="true">
-                            <li data-icon="false">
-                                <h1>Titulo da primeira palestra</h1>
-                                <h2>Palestrante</h2>
-                            </li>
-                            <li data-icon="false">
-                                <h2>Titulo da segunda palestra</h2>
-                            </li>
-                            <li data-icon="false">
-                                <h2>Titulo da terceira palestra</h2>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div style="text-align: center" class="ui-body">
-                    <label for="btn-beacon-sensor">
-                        Sensor de proximidade
-                    </label>
-                    <select id="btn-beacon-sensor" data-role="slider">
-                        <option value="off"></option>
-                        <option value="on"></option>
-                    </select>
                 </div>
             </div>
             <a class="btn-to-top"></a>
@@ -267,24 +247,6 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
                 </p>
                 <p class="ui-body">
                     Participe do maior evento de internet do mundo!
-                </p>
-                
-                <h3>Dicas de uso</h3>
-                
-                <h5 class="ui-body">Agenda</h5>
-                
-                <p class="ui-body">
-                    Acompanhe todas as atividades e palestras por palco ou por 
-                    dia. Gerencie facilemete sua agenda adicionando 
-                    <img src="img/btn_inscrever.png" style="width: 70px; height: auto;" alt="">
-                    e/ou remover <img src="img/btn_cancelar.png" style="width: 60px; height: auto;" alt=""> 
-                    atividades e palestras da #CPBr8
-                </p>
-                
-                <h5 class="ui-body">Destaques</h5>
-                <p class="ui-body">
-                    Em destaques fique sabendo o que está rolando ou o que irá 
-                    rolar na #CPRecife4.
                 </p>
                 <p class="ui-body">
                     Este aplicativo foi desenvolvido por uma empresa que começou 

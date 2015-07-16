@@ -17,16 +17,6 @@
 
 BigEyesSolutionApp.initialize();
 
-BigEyesSolutionApp.addjQueryEvent('#btn-beacon-sensor', 'change', function() {
-    if (getBtnBeaconStatus()) {
-        ProximityMonitor.enableMonitoring();
-    } else {
-        ProximityMonitor.disableMonitoring();
-    }
-    
-    showBeaconStausDiv();
-});
-
 BigEyesSolutionApp.addjQueryEvent(
     ':mobile-pagecontainer', 'pagecontainerbeforechange', function (event, ui) {
         var prevPage = ui.prevPage.attr("id");
@@ -62,7 +52,6 @@ BigEyesSolutionApp.addjQueryEvent(
             case 'page-news':
                 break;
             case 'page-beacon':
-                showBeaconStausDiv();
                 break;
             case 'page-abount':
                 break;

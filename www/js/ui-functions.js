@@ -33,16 +33,6 @@ function prepareUI () {
     });
     
     $('.btn-to-top').hide();
-    
-    $("#beacon-on, #beacon-notify, #beacon-off").hide();
-}
-
-/**
- * Get the status for #btn-beacon-sensor
- * @returns {Boolean}
- */
-function getBtnBeaconStatus () {
-    return $('#btn-beacon-sensor').val() === 'on';
 }
 
 /**
@@ -53,18 +43,6 @@ function getBtnBeaconDevStatus () {
     return $('#btn-beacon-dev-sensor').val() === 'on';
 }
 
-/**
- * @TODO: Inserir verificação de noficações
- * @returns {undefined}
- */
-function showBeaconStausDiv () {
-    var divToShow = ProximityMonitor.isMonitoring() ? 
-        true /* if list notifications has elements */ ? '#beacon-notify' : '#beacon-on' 
-        : '#beacon-off';
-        
-    $("#beacon-on, #beacon-notify, #beacon-off").hide();
-    $(divToShow).fadeIn();
-}
 
 var _dateFilter = new Date (2015, 07, 23);
 
