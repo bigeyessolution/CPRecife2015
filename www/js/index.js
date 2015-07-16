@@ -30,7 +30,6 @@ BigEyesSolutionApp.addjQueryEvent(
             case 'page-news':
                 break;
             case 'page-beacon':
-                showBeaconStausDiv();
                 break;
             case 'page-abount':
                 break;
@@ -84,8 +83,6 @@ ProximityMonitor.init();
 ApiCache.init();
 
 ApiCache.addUrl('schedule', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/schedule/', 3600, populateSchedulePage);
-//ApiCache.addUrl('stages', 'http://campuse.ro/api/legacy/events/campus-party-recife-2015/stages/', 3600, populateStagesPage);
-//ApiCache.addUrl('news', 'http://recife.campus-party.org/api/containerbox/?name=api-destaques', 3000, populateNewsPage);
 
 ApiCache.addUrl('beacons', 'https://s3.amazonaws.com/cdn.campuse.ro/cprecife.beacon.json', 0, function (cacheId, data) { ProximityMonitor.setBeaconsList(data); });
 
@@ -103,7 +100,6 @@ function onDeviceReady () {
 }
 
 if (BigEyesSolutionApp.isOnCordova()) {
-    console.log(BigEyesSolutionApp.isOnCordova());
     document.addEventListener('deviceready', onDeviceReady, false);
 } else {
     $(onDeviceReady);
