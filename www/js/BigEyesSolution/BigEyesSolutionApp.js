@@ -21,33 +21,35 @@
  * @type BigEyesSolutionApp
  */
 var BigEyesSolutionApp = {
-    //googleAnalytics: window.plugins.gaPlugin,
+    googleAnalytics: false,
     backgroundTimer: false,
     i18n: 'pt',
     jQueryEvents: [],
     conf: [],
+    platform: 'web',
     /**
      * Initialize the
      */
     initialize: function() {
         //Get information about device
         //Get language
+        
+//        this.googleAnalytics = window.plugins.gaPlugin;
+//        
 //        this.googleAnalytics.init(
 //            this.successHandler, this.errorHandler, "UA-59229933-2", 10
 //        );
-
-        //if is iOS: window.plugins.webviewcolor.change('#FFFFFF');
         
         var conf = window.localStorage.getItem('BigEyesConf');        
         this.conf = conf ? JSON.parse(conf) : [];
         
-        for (var index = 0; index < this.conf; index ++) {
-            if (this.conf[index].type == 'number') {
-                this.conf[index].value = Number(this.conf[index].value);
-            } else if (this.conf[index].type == 'boolean') {
-                this.conf[index].value = Boolean(this.conf[index].value);
-            }
-        }
+//        for (var index = 0; index < this.conf; index ++) {
+//            if (this.conf[index].type == 'number') {
+//                this.conf[index].value = Number(this.conf[index].value);
+//            } else if (this.conf[index].type == 'boolean') {
+//                this.conf[index].value = Boolean(this.conf[index].value);
+//            }
+//        }
     },
     /**
      * Verify if the applications is running with cordova environment.
@@ -74,6 +76,7 @@ var BigEyesSolutionApp = {
     bindEvents: function() {
         for (var i = 0; i < this.jQueryEvents.length; i++) {
             var event = this.jQueryEvents[i];
+            
             $(event.selector).on(event.events, event.handler);
         }
         

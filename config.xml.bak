@@ -55,4 +55,8 @@
     <allow-navigation href="*" />
     <allow-intent href="*" />
     <access origin="*"/>
+    <access origin="http://campuse.ro/*"  subdomains="true"/>
+    <access origin="https://s3.amazonaws.com/*"  subdomains="true"/>
+    <access origin="http://google.com" subdomains="true" />
+    <access origin="https://google.com" subdomains="true" />
 </widget>

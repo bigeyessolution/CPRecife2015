@@ -41,7 +41,6 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
         <script type="text/javascript" src="js/BigEyesSolution/ApiCache.js"></script>
         <script type="text/javascript" src="js/BigEyesSolution/ProximityMonitor.js"></script>
         <script type="text/javascript" src="js/BigEyesSolution/BigEyesSolutionApp.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/ui-functions.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <title>Campus Party Recife 2015</title>
@@ -86,11 +85,6 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
                     <li data-icon="false"><a onclick="showScheduleByDay(25)">
                         <h2>25 de julho de 2015</h2>
                     </a></li>
-                    <!--
-                    <li data-icon="false"><a onclick="showScheduleByDay(26)">
-                        <h2>26 de julho de 2015</h2>
-                    </a></li>
-                    -->
                 </ul>
             </div>
         </section> <!-- end #page-schedule -->
@@ -158,12 +152,6 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
                 </ul>
             </div>
             <a class="btn-to-top"></a>
-            <!--
-            <div id="schedule-filter-bar" class="ui-grid-a">
-                <div class="ui-block-a"><a onclick="toggleScheduleFilterBar()">&Gt;</a></div>
-                <div class="ui-block-b"><input id="search-stage" data-type="search" placeholder="Pesquisar..."></div>
-            </div>
-            -->
         </section> <!-- end #page-schedule -->
         
         <section id="page-news" data-role="page">
@@ -171,16 +159,8 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
                 <img src="img/cp-logo.png" alt="" class="cp-bg-creativity">
             </div>
             
-            <div role="main" class="ui-content speakers">
-                <span class="speakres_span">Magistrais, destaques e curadores.</span><br>
-                <img class="speakres_img" src="img/speakers/lorrana_scarpioni-m.png" alt=""></br>
-                <span class="speakres_name">Lorrana Scarpioni</span>
-                <img class="speakres_img" src="img/speakers/lorrana_scarpioni-m.png" alt=""></br>
-                <span class="speakres_name">Lorrana Scarpioni</span>
-                <img class="speakres_img" src="img/speakers/lorrana_scarpioni-m.png" alt=""></br>
-                <span class="speakres_name">Lorrana Scarpioni</span>
-                <img class="speakres_img" src="img/speakers/lorrana_scarpioni-m.png" alt=""></br>
-                <span class="speakres_name">Lorrana Scarpioni</span>
+            <div role="main" class="ui-content cp-speakers">
+                <h3>Magistrais, destaques e curadores.</h3><br>
             </div>
             <a class="btn-to-top"></a>
         </section> <!-- end #page-news -->
@@ -272,5 +252,12 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
             </div>
             <a class="btn-to-top"></a>
         </section> <!-- end #page-about -->
+        
+        <script type="text/javascript" src="cordova.js"></script>
+        <script>
+            prepareUI(); 
+            populateMagistrais();
+            onReady();
+        </script>
     </body>
 </html>

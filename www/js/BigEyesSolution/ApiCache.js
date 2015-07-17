@@ -109,7 +109,7 @@ var ApiCache = {
         var flag = BigEyesSolutionApp.isConnected() && (time > cache.timeToLive);
         
         function _offLineHandler () {
-            if(cache.uiHandler) cache.uiHandler(cacheId, cache.content);
+            if(cache.uiHandler) cache.uiHandler(cache.cacheId, cache.content);
         }
         
         if( flag ) {
@@ -136,19 +136,20 @@ var ApiCache = {
      */
     updateAllCaches: function () {
         $.each(this.urls, function (index, cache) {
-//            ApiCache.updateCache(url.cacheId);
-
-            var flag = BigEyesSolutionApp.isConnected() && (time > cache.timeToLive);
-
-            if (!flag) return;
-
             var time = (new Date()).getTime() - cache.lastUpdate;
+            var cacheId = cache.cacheId;
+            
+            var flag = BigEyesSolutionApp.isConnected() && (time > cache.timeToLive);
+            
+            if (!flag) return;
             
             function _onLineHandler (data) {
                 ApiCache.setContent(cacheId, data);
             }
             
-            $.getJSON(cache.url, _onLineHandler);
+            $.getJSON(cache.url, _onLineHandler).fail(function() {
+                console.log ("Nao baixou " + cache.cacheId);
+            });
         });
     }
 }

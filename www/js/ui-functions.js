@@ -35,6 +35,37 @@ function prepareUI () {
     $('.btn-to-top').hide();
 }
 
+function populateMagistrais () {
+    var magistrais = [
+        { name: "Dado Schneider", img: "dado_schneider-d.jpg" }, 
+        { name: "David Ruiz", img: "david_ruiz.jpg" }, 
+        { name: "Dino Lincoln", img: "dino_lincoln.jpg" }, 
+        { name: "Edney Souza", img: "edney_souza.jpg" }, 
+        { name: "Eiran Simis", img: "eiran_simis.jpg" }, 
+        { name: "Genesio Gomes", img: "genesio_gomes.png" }, 
+        { name: "Guga Gorenstein", img: "guga_gorenstein.jpg" }, 
+        { name: "HD Mabuse", img: "hd_mabuse.png" },
+        { name: "Henrique Foresti", img: "henrique_foresti.jpg" },
+        { name: "Kiev Gama", img: "kiev_gama.png" },
+        { name: "Leonardo Leitão", img: "leonardo_leitao.png" },
+        { name: "Lorrana Scarpioni", img: "lorrana_scarpioni-m.png" }, 
+        { name: "Mario Chapela", img: "mario_chapela.jpg" },
+        { name: "Moacy Alves Jr", img: "moacy_alves_jr.jpg" },
+        { name: "Neil Harbisson", img: "neil_harbisson-m.jpg" },
+        { name: "NIC Br", img: "nic_br.jpg" },
+        { name: "Paulo Henrique Santana", img: "paulo_henrique_santana.jpg" },
+        { name: "Rodrigo Medeiros", img: "rodrigo_medeiros.jpg" },
+        { name: "Sergio Sacani", img: "sergio_sacani.jpg" }
+    ]
+    
+    $.each(magistrais, function (key, speaker) {
+        var img_src = 'img/speakers/' + speaker.img;
+        
+        $('<img src="' + img_src + '"></br><h2>' + speaker.name + '</h2></br>')
+            .appendTo(".cp-speakers");
+    });
+}
+
 /**
  * Get the status for #btn-beacon-dev-sensor.
  * @returns {Boolean}
@@ -50,6 +81,8 @@ function showScheduleByDay (day) {
     _dayFilter = day;
     
     $(".be-schedule-list").empty();
+    
+    ApiCache.updateCache('schedule'); /*Ver um jeito de mudar isso*/
     
     $(':mobile-pagecontainer').pagecontainer("change", "#page-schedule-by-stage");
 }
@@ -101,7 +134,7 @@ function getListIdToStage (stage_slug) {
     }
 }
 
-function populateSchedulePage (cacheId, data) {
+function populateSchedulePage (cacheId, data) {    
     for (var index = 0; index < data.length; index ++) {
         var aux = data[index].date.split(" ");
         var aux_date = aux[0].split("-");

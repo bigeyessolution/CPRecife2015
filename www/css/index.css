@@ -241,12 +241,9 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
     margin-bottom: 0.5em;
 }
 
-.speakers{
-    text-align: center !important;
-    overflow: hidden;
-}
+.cp-speakers { text-align: center !important; overflow: hidden; }
 
-.speakres_img{
+.cp-speakers img {
     border-radius:50% ;
     -moz-border-radius:50%;
     -webkit-border-radius:50%;
@@ -255,12 +252,9 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
     margin-bottom: 1.6rem !important;    
     margin-top: 2rem !important;
 }
-.speakres_span{
-    font-size: 1.6em;
-}
-.speakres_name{
-    font-size: 1.2em;
-}
 
+.cp-speakers h3 { font-size: 1.6em; }
+
+.cp-speakers h2 {  font-size: 1.2em; }
 
 ul.ui-collapsible-set { padding: 0 !important; list-style-type: none !important; }

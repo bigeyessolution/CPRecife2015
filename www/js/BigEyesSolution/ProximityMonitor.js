@@ -20,32 +20,91 @@
  * @type ProximityMonitor
  */
 var ProximityMonitor = {
+    delegate: false,
     beaconsList: [], // [uuid][major][minor] = data
     beaconRegions: [],
     beaconMonitoring: false,
-    init: function () {
-        this.beaconMonitoring = BigEyesSolutionApp.getConf("beaconmonitoring");
+    beaconRanging: false,
+    init: function (data) {
+        
+        this.delegate = new cordova.plugins.locationManager.Delegate ();
+        
+        this.delegate.didDetermineStateForRegion = this.didDetermineStateForRegion;
+        this.delegate.didStartMonitoringForRegion = this.didStartMonitoringForRegion;
+        this.delegate.didRangeBeaconsInRegion = this.digRangeBeaconsInRegion;
+        
+        if (data) {
+            this.setBeaconsList(data);
+            
+            this.startRangingMonitoring();
+        }
     },
     setBeaconsList: function (data) {
         this.beaconsList = data;
     },
+    setRegions: function () {
+        
+    },
     clearBeacons: function () {
         
     },
-    /**
-     * 
-     * @param {Boolean} status
-     * @returns {undefined}
-     */
-    enableMonitoring: function () {
+    didDetermineStateForRegion: function (result) {
+        console.log("didDetermineStateForRegion:" + JSON.stringify(result));
+    },
+    didStartMonitoringForRegion: function (result) {
+        console.log("didStartMonitoringForRegion:" + JSON.stringify(result));
+    },
+    digRangeBeaconsInRegion: function (result) {
+        console.log("digRangeBeaconsInRegion:" + JSON.stringify(result));
+    },
+    didEnterRegion: function (result) {
+        console.log("didEnterRegion:" + JSON.stringify(result));
+    },
+    didExitRegion: function (result) {
+        console.log("didExitRegion:" + JSON.stringify(result));
+    },
+    startRangingMonitoring: function () {
+        var flagCanStart = false;
+        
+        if (device.platform == 'Android') {
+            cordova.plugins.locationManager.isBluetoothEnabled()
+            .then(function(isEnabled){
+                if (!isEnabled) {
+                    cordova.plugins.locationManager.enableBluetooth();        
+                }
+            }).fail(console.error).done(function(){ 
+                flagCanStart = cordova.plugins.locationManager.isBluetoothEnabled();
+            });
+        } else if (device.platform == 'iOS') {
+            flagCanStart = cordova.plugins.locationManager.requestAlwaysAuthorization();
+        }
+        
+        this.beaconRegions = [];
+        
+        for (index in this.beaconsList) {
+            var beacon = this.beaconsList[index];
+            
+            var region = new cordova.plugins.locationManager.BeaconRegion(
+                beacon.id, beacon.uuid, beacon.major, beacon.minor
+            );
+            
+            this.beaconRegions.push(region);
+            
+            cordova.plugins.locationManager.startMonitoringForRegion(region);
+            cordova.plugins.locationManager.startRangingBeaconsInRegion(region);
+        }
+        
         this.beaconMonitoring = true;
-        BigEyesSolutionApp.setConf("beaconmonitoring", true);
     },
-    disableMonitoring: function () {
+    stopRangingMonitoring: function () {
+        for (index in this.beaconRegions) {
+            var region = this.beaconRegions[index];
+            
+            cordova.plugins.locationManager.stopMonitoringForRegion(region).fail(console.error).done();
+            cordova.plugins.locationManager.stopRangingBeaconsInRegion(region).fail(console.error).done();
+        }
+        
+        this.beaconRegions = [];
         this.beaconMonitoring = false;
-        BigEyesSolutionApp.setConf("beaconmonitoring", false);
-    },
-    isMonitoring: function () {
-        return this.beaconMonitoring;
     }
 }
