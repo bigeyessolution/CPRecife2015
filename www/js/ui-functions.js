@@ -11,28 +11,97 @@
  * Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License along 
- * with Campus Party - Recife 2015 App.
+ * with Campus Party Recife 2015 App.
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
 
 function prepareUI () {
-    //Fixing header navbar
     $("[data-role='navbar']").navbar();
     $("#header-menu").toolbar();
     
     $(".animateMe .ui-collapsible-heading-toggle").click(function (e) {
-        var current = $(this).closest(".ui-collapsible");             
+        var current = $(this).closest(".ui-collapsible");
+        
         if (current.hasClass("ui-collapsible-collapsed")) {
-            //collapse all others and then expand this one
-            $(".ui-collapsible").not(".ui-collapsible-collapsed").find(".ui-collapsible-heading-toggle").click();
+            $(".ui-collapsible").not(".ui-collapsible-collapsed")
+                    .find(".ui-collapsible-heading-toggle").click();
             $(".ui-collapsible-content", current).slideDown(500);
         } else {
             $(".ui-collapsible-content", current).slideUp(500);
         }
     });
     
-    $('.btn-to-top').hide();
+    $(document).scroll(function () {
+        var activePage = $(":mobile-pagecontainer")
+                .pagecontainer("getActivePage").attr("id");
+        
+        if ($(window).scrollTop() > 100) {
+            $('#' + activePage + ' .btn-to-top').fadeIn(500);
+        } else {
+            $('#' + activePage + ' .btn-to-top').fadeOut(500);
+        }
+    });
+    
+    $('.btn-to-top').click(function () {
+        $('html, body').animate({ 
+            scrollTop: $(":mobile-pagecontainer").offset().top 
+        }, 1000);
+    }).hide();
+    
+    $('#search-stage').focusin(function () { 
+        $('#page-schedule-by-stage .ui-footer').hide(); 
+    }).focusout(function () { 
+        $('#page-schedule-by-stage .ui-footer').fadeIn(); 
+    });
+    
+    $(':mobile-pagecontainer').on('pagecontainerbeforechange', 
+    function (event, ui) {
+        var prevPage = ui.prevPage.attr("id");
+        if (prevPage == 'page-schedule-by-stage') { 
+            $("#page-schedule-by-stage .ui-collapsible").collapsible("collapse");
+        }
+    });
+    
+    $(':mobile-pagecontainer').on('pagecontainershow', 
+    function (event, ui) {
+        var toPage = ui.toPage.attr("id");
+        if (toPage == 'page-schedule-by-stage') populateSchedule();
+    });
+}
+
+function populateSchedule () {
+    var dataSchedule = [];
+        
+    $.getJSON(
+        'http://campuse.ro/api/legacy/events/campus-party-recife-2015/schedule/',
+    function (data) {
+        dataSchedule = data;
+        window.localStorage.setItem('schedule', JSON.stringify(data));
+    }).fail(function () {
+        var data = window.localStorage.getItem('schedule');
+
+        dataSchedule = data ? JSON.parse(data) : [];
+    }).done(function () {
+        $.each(dataSchedule, function (index, data) {                                
+            var aux = data.date.split(" ");
+            var aux_date = aux[0].split("-");
+
+            if( aux_date[2] == _dayFilter ) {
+                var aux_hour = aux[1].split(":");
+
+                var date = new Date (data.date);
+
+                $("<li><h3>" 
+                    + data.title 
+                    + "</h3><p>" + aux_hour[0] + ":" + aux_hour[1] 
+                    + "</p></li>"
+                ).appendTo( getListIdToStage(data.stage_slug) );
+            }
+        });
+
+        $(".be-schedule-list").listview("refresh");
+    });
 }
 
 function populateMagistrais () {
@@ -61,8 +130,10 @@ function populateMagistrais () {
     $.each(magistrais, function (key, speaker) {
         var img_src = 'img/speakers/' + speaker.img;
         
-        $('<img src="' + img_src + '"></br><h2>' + speaker.name + '</h2></br>')
-            .appendTo(".cp-speakers");
+        $('<img src="' + img_src + '"></br><h2>' 
+            + speaker.name 
+            + '</h2></br>'
+        ).appendTo(".cp-speakers");
     });
 }
 
@@ -70,10 +141,9 @@ function populateMagistrais () {
  * Get the status for #btn-beacon-dev-sensor.
  * @returns {Boolean}
  */
-function getBtnBeaconDevStatus () {
+function getBtnBeaconDevStatus () { 
     return $('#btn-beacon-dev-sensor').val() === 'on';
 }
-
 
 var _dateFilter = new Date (2015, 07, 23);
 
@@ -82,9 +152,8 @@ function showScheduleByDay (day) {
     
     $(".be-schedule-list").empty();
     
-    ApiCache.updateCache('schedule'); /*Ver um jeito de mudar isso*/
-    
-    $(':mobile-pagecontainer').pagecontainer("change", "#page-schedule-by-stage");
+    $(':mobile-pagecontainer')
+        .pagecontainer("change", "#page-schedule-by-stage");
 }
 
 function toggleScheduleFilterBar() {
@@ -93,14 +162,6 @@ function toggleScheduleFilterBar() {
     } else {
         $('#schedule-filter-bar').addClass('filter-bar-hidden');
     }
-}
-
-function populateStagesPage (cacheId, data) {
-    
-}
-
-function populateNewsPage (cacheId, data) {
-    
 }
 
 function getListIdToStage (stage_slug) {
@@ -134,7 +195,7 @@ function getListIdToStage (stage_slug) {
     }
 }
 
-function populateSchedulePage (cacheId, data) {    
+function populateSchedulePage (cacheId, data) {
     for (var index = 0; index < data.length; index ++) {
         var aux = data[index].date.split(" ");
         var aux_date = aux[0].split("-");
@@ -145,11 +206,10 @@ function populateSchedulePage (cacheId, data) {
         
         var date = new Date (data[index].date);
         
-//        var h = date.getHours().toString();
-//        var m = date.getMinutes() < 10 ? "0" + date.getMinutes().toString(): date.getMinutes().toString();
-        
-        $("<li><h3>" + data[index].title + "</h3><p>" + aux_hour[0] + ":" + aux_hour[1] + "</p></li>")
-        .appendTo(getListIdToStage(data[index].stage_slug));
+        $("<li><h3>" + data[index].title 
+            + "</h3><p>" + aux_hour[0] + ":" + aux_hour[1] 
+            + "</p></li>")
+        .appendTo( getListIdToStage(data[index].stage_slug) );
     }
     
     $(".be-schedule-list").listview("refresh");

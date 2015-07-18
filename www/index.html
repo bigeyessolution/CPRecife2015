@@ -12,7 +12,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
 Public License for more details.
 
 You should have received a copy of the GNU General Public License along 
-with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
+with Campus Party Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
 -->
 <html>
     <head>
@@ -38,14 +38,13 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <script type="text/javascript" src="js/jquery/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/jquerymobile/jquery.mobile-1.4.5.js"></script>
-        <script type="text/javascript" src="js/BigEyesSolution/ApiCache.js"></script>
-        <script type="text/javascript" src="js/BigEyesSolution/ProximityMonitor.js"></script>
-        <script type="text/javascript" src="js/BigEyesSolution/BigEyesSolutionApp.js"></script>
+        <script type="text/javascript" src="js/beacons.js"></script>
         <script type="text/javascript" src="js/ui-functions.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
         <title>Campus Party Recife 2015</title>
     </head>
-    <body>
+    <body onload="">
         <div id="header-menu" data-role="header" data-position="fixed" data-tap-toggle="false" data-fullscreen="false">
             <div data-role="navbar">
                 <ul>
@@ -252,12 +251,5 @@ with Campus Party - Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
             </div>
             <a class="btn-to-top"></a>
         </section> <!-- end #page-about -->
-        
-        <script type="text/javascript" src="cordova.js"></script>
-        <script>
-            prepareUI(); 
-            populateMagistrais();
-            onReady();
-        </script>
     </body>
 </html>
