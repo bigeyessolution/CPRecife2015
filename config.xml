@@ -50,7 +50,7 @@
     <gap:plugin name="org.apache.cordova.vibration"/>
     <gap:plugin name="com.adobe.plugins.gaplugin"/>
     <gap:plugin name="com.unarin.cordova.beacon" />
-    <gap:plugin name="ordova-plugin-local-notifications" />
+    <gap:plugin name="cordova-plugin-local-notifications" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
     <access origin="*"/>
