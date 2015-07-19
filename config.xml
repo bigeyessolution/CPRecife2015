@@ -32,6 +32,8 @@
     <icon gap:platform="winphone" gap:role="background" src="res/icon/windows-phone/icon-173-tile.png"/>
     <icon gap:platform="firefoxos" src="res/icon/firefoxos/icon.png"/>
     <icon src="icon.png"/>
+    <gap:platform name="ios" />
+    <gap:platform name="android" />
     <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="res/screen/android/ldpi/screen.png"/>
     <gap:splash gap:platform="android" gap:qualifier="port-mdpi" src="res/screen/android/mdpi/screen.png"/>
     <gap:splash gap:platform="android" gap:qualifier="port-hdpi" src="res/screen/android/hdpi/screen.png"/>
