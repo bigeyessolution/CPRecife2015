@@ -46,12 +46,11 @@
     <gap:splash src="splash.png"/>
     <gap:plugin name="org.apache.cordova.device"/>
     <gap:plugin name="org.apache.cordova.dialogs"/>
-    <gap:plugin name="org.apache.cordova.network-information"/>
     <gap:plugin name="org.apache.cordova.splashscreen"/>
     <gap:plugin name="org.apache.cordova.vibration"/>
     <gap:plugin name="com.adobe.plugins.gaplugin"/>
-    <gap:plugin name="com.michelbb.cordova.beacon" />
-    <gap:plugin name="de.appplant.cordova.plugin.background-mode" />
+    <gap:plugin name="com.unarin.cordova.beacon" />
+    <gap:plugin name="ordova-plugin-local-notifications" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
     <access origin="*"/>
