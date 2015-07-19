@@ -16,7 +16,7 @@
             "description": "Palco Lua CPRec4",
             "place_type": "stage",
             "stage_slug" : "PalcoLuaCPRec4",
-            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
+            "uuid": "20cae8a0-a9cf-11e3-a5e2-0800200c9a66",
             "major": 213,
             "minor": 17780
         }

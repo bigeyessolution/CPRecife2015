@@ -24,17 +24,49 @@ var beaconsList = false;
 var beaconsRegions = false;
 var urlToSendBeaconsInfo = false;
 
+// History of enter/exit events.
+var mRegionEvents = [];
+// Nearest ranged beacon.
+var mNearestBeacon = null;
+// Timer that displays nearby beacons.
+var mNearestBeaconDisplayTimer = null;
+// Background notification id counter.
+var mNotificationId = 0;
+// Mapping of region event state names.
+// These are used in the event display string.
+var mRegionStateNames =
+        {
+            'CLRegionStateInside': 'Enter',
+            'CLRegionStateOutside': 'Exit'
+        };
+
 function beaconsInit() {
-    var region = new ibeacon.Region({ uuid: '20CAE8A0-A9CF-11E3-A5E2-0800200C9A66' });
-    
-    ibeacon.startRangingBeaconsInRegion({
-        region: region,
-        didRangeBeacons: function(result) {
-            console.log('I see ' + result.beacons.length + ' beacons');
-            
-            $('#beaconlog').append(JSON.stringify(result.beacons) + '<br>');
+    $.getJSON('https://s3.amazonaws.com/cdn.campuse.ro/cprecife.beacon.json', function (data) {
+        urlToSendBeaconsInfo = data.info_to_url != '' ? data.info_to_url : false;
+
+        beaconsList = data.beacons;
+
+        window.localStorage.setItem('beaconsList', JSON.stringify(data));
+    }).fail(function () {
+        var tmpData = window.localStorage.getItem('beaconsList');
+
+        tmpData = tmpData ? JSON.parse(tmpData) : false;
+
+        if (tmpData === false) {
+            beaconsList = false;
+            urlToSendBeaconsInfo = false;
+
+            return;
         }
-    });
+
+        for (index in tmpData.beacons) {
+            tmpData.beacons[index].major = parseInt(tmpData.beacons[index].major);
+            tmpData.beacons[index].minor = parseInt(tmpData.beacons[index].minor);
+        }
+
+        urlToSendBeaconsInfo = tmpData.info_to_url != '' ? tmpData.info_to_url : false;
+        beaconsList = data.beacons;
+    }).done(startMonitor);
 }
 
 function startMonitor() {
@@ -43,46 +75,65 @@ function startMonitor() {
 
     beaconsRegions = [];
 
+    delegate = new cordova.plugins.locationManager.Delegate();
+
+    delegate.didDetermineStateForRegion = didDetermineStateForRegion;
+    delegate.didStartMonitoringForRegion = didStartMonitoringForRegion;
+    delegate.didRangeBeaconsInRegion = digRangeBeaconsInRegion;
+
+    if (device.platform == 'Android') {
+        cordova.plugins.locationManager.isBluetoothEnabled()
+                .then(function (isEnabled) {
+                    if (!isEnabled) {
+                        cordova.plugins.locationManager.enableBluetooth();
+                    }
+                });
+    } else if (device.platform == 'iOS') {
+        cordova.plugins.locationManager.requestAlwaysAuthorization();
+    }
+
     for (index in beaconsList) {
         var beacon = beaconsList[index];
 
-        var region = new ibeacon.Region( {
-            uuid: beacon.uuid,
-            major: beacon.major,
-            minor: beacon.minor,
-            didRangeBeacons: digRangeBeaconsInRegion
-        });
+        var region = new cordova.plugins.locationManager.BeaconRegion(
+                beacon.id, beacon.uuid, beacon.major, beacon.minor
+                );
 
         beaconsRegions.push(region);
         
+        cordova.plugins.locationManager.startMonitoringForRegion(region)
+                .fail(console.error).done();
+        cordova.plugins.locationManager.startRangingBeaconsInRegion(region)
+                .fail(console.error).done();
     }
-    
-    ibeacon.startRangingBeaconsInRegion(beaconsRegions);
-    
-    $('#beaconlog').append(JSON.stringify(beaconsRegions));
 }
 
 function stopMonitor() {
     for (index in beaconsRegions) {
         var region = beaconsRegions[index];
 
-        
+        cordova.plugins.locationManager.stopMonitoringForRegion(region).fail(console.error).done();
+        cordova.plugins.locationManager.stopRangingBeaconsInRegion(region).fail(console.error).done();
     }
 
     beaconsRegions = false;
 }
 
 function didDetermineStateForRegion(result) {
-    $('#beaconlog').append("didDetermineStateForRegion:" + JSON.stringify(result.beacons) + '<br>');
+    $('#beaconlog').append("didDetermineStateForRegion:" + JSON.stringify(result.region) + '<br>');
 
+//    cordova.plugins.locationManager.appendToDeviceLog('[DOM] didDetermineStateForRegion: '
+//            + JSON.stringify(pluginResult));
+
+    saveRegionEvent(result.state, result.region.identifier);
+    displayRecentRegionEvent();
 }
 
 function didStartMonitoringForRegion(result) {
     $('#beaconlog').append("didStartMonitoringForRegion:" + JSON.stringify(result) + '<br>');
 }
 function digRangeBeaconsInRegion(result) {
-    $('#beaconlog').append("digRangeBeaconsInRegion:" + JSON.stringify(result.beacons) + '<br>');
-    console.log(JSON.stringify(region.beacons))
+    $('#beaconlog').append("digRangeBeaconsInRegion:" + JSON.stringify(result) + '<br>');
     //updateNearestBeacon(result.beacons);
 }
 

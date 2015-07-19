@@ -25,16 +25,32 @@ var beaconsRegions = false;
 var urlToSendBeaconsInfo = false;
 
 function beaconsInit() {
-    var region = new ibeacon.Region({ uuid: '20CAE8A0-A9CF-11E3-A5E2-0800200C9A66' });
-    
-    ibeacon.startRangingBeaconsInRegion({
-        region: region,
-        didRangeBeacons: function(result) {
-            console.log('I see ' + result.beacons.length + ' beacons');
-            
-            $('#beaconlog').append(JSON.stringify(result.beacons) + '<br>');
+    $.getJSON('https://s3.amazonaws.com/cdn.campuse.ro/cprecife.beacon.json', function (data) {
+        urlToSendBeaconsInfo = data.info_to_url != '' ? data.info_to_url : false;
+
+        beaconsList = data.beacons;
+
+        window.localStorage.setItem('beaconsList', JSON.stringify(data));
+    }).fail(function () {
+        var tmpData = window.localStorage.getItem('beaconsList');
+
+        tmpData = tmpData ? JSON.parse(tmpData) : false;
+
+        if (tmpData === false) {
+            beaconsList = false;
+            urlToSendBeaconsInfo = false;
+
+            return;
         }
-    });
+
+        for (index in tmpData.beacons) {
+            tmpData.beacons[index].major = parseInt(tmpData.beacons[index].major);
+            tmpData.beacons[index].minor = parseInt(tmpData.beacons[index].minor);
+        }
+
+        urlToSendBeaconsInfo = tmpData.info_to_url != '' ? tmpData.info_to_url : false;
+        beaconsList = data.beacons;
+    }).done(startMonitor);
 }
 
 function startMonitor() {
