@@ -15,11 +15,29 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+var isAppInBackground = false;
+
 document.addEventListener('deviceready', function () {
-    //beaconsInit();
+//    platform = device.platform;
+    
+    beaconsInit();
     
     prepareUI(); 
 
     populateMagistrais();
     
+    //Ativar exibição de notificações no app
+    
 }, false);
+
+document.addEventListener('pause', function () {
+    isAppInBackground = true;
+    //Desativar exibição de notificações no app
+    stopNearestBeaconDisplayTimer();
+});
+
+document.addEventListener('resume', function () {
+    isAppInBackground = false;
+    //Ativar exibição de notificações no app
+    startNearestBeaconDisplayTimer();
+});

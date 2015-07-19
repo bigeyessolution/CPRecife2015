@@ -3,132 +3,22 @@
     "info_to_url": "",
     "beacons": [
         {
-            "id": "PalcoTerraCPRec4",
+            "id": "0",
             "description": "Palco Terra CPRec4",
-            "place_type": "stage", 
+            "place_type": "stage",
+            "stage_slug" : "PalcoTerraCPRec4",
             "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
             "major": 213,
             "minor": 2646
         },
         {
-            "id": "PalcoTerraCPRec4",
-            "description": "Palco Terra CPRec4",
-            "place_type": "stage", 
-            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-            "major": 0,
-            "minor": 0
-        },
-        {
-            "id": "PalcoJupiterCPRecife",
-            "description": "Palco Jupiter CPRec4",
-            "place_type": "stage",
-            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-            "major": 0,
-            "minor": 0
-        },
-        {
-            "id": "PalcoMarteCPRec4",
-            "description": "Palco Marte CPRec4",
-            "place_type": "stage",
-            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-            "major": 0,
-            "minor": 0
-        },
-        {
-            "id": "PalcoLuaCPRec4",
+            "id": "4",
             "description": "Palco Lua CPRec4",
             "place_type": "stage",
+            "stage_slug" : "PalcoLuaCPRec4",
             "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
             "major": 213,
             "minor": 17780
-        },
-        {
-            "id": "PalcoSaturnoCPRec4",
-            "description": "Palco Saturno CPRec4",
-            "place_type": "stage",
-            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-            "major": 0,
-            "minor": 0
-        },
-        {
-            "id": "PalcoVenusCPRec4",
-            "description": "Palco Venus CPRec4",
-            "place_type": "stage",
-            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-            "major": 0,
-            "minor": 0
-        },
-        {
-            "id": "Workshop1CienciaCPRecife4",
-            "description": "Workshop I Ciencia CPRecife4",
-            "place_type": "stage",
-            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-            "major": 0,
-            "minor": 0
-        },
-        {
-            "id": "Workshop2inovacaoCPRecife4",
-            "description": "Workshop II Inovaçao CPRecife4",
-            "place_type": "stage",
-            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-            "major": 0,
-            "minor": 0
-        },
-        {
-            "id": "PalcoStartupMakersCampCPRecife4",
-            "description": "Startup&Makers Camp CPRecife4",
-            "place_type": "stage",
-            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-            "major": 0,
-            "minor": 0
-        },
-        {
-            "id": "WorkshopStartupMakersCampCPRecife4",
-            "description": "Workshop Startup&Makers Camp CPRecife4",
-            "place_type": "stage",
-            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-            "major": 0,
-            "minor": 0
-        },
-        {
-            "id": "InclusaoDigitalICPRecife4",
-            "description": "Inclusao Digital I CPRecife4",
-            "place_type": "stage",
-            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-            "major": 0,
-            "minor": 0
-        },
-        {
-            "id": "InclusaoDigitalIICPRecife4",
-            "description": "Inclusao Digital II CPRecife4",
-            "place_type": "stage",
-            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-            "major": 0,
-            "minor": 0
-        },
-        {
-            "id": "ConteudosbyComunidadesCPRecife4",
-            "description": "Conteúdos by Comunidades CPRecife4",
-            "place_type": "stage",
-            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-            "major": 0,
-            "minor": 0
-        },
-        {
-            "id": "restaurante",
-            "description": "Restaurante",
-            "place_type": "other",
-            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-            "major": 0,
-            "minor": 0
-        },
-        {
-            "id": "camping",
-            "description": "Camping",
-            "place_type": "other",
-            "uuid": "20CAE8A0-A9CF-11E3-A5E2-0800200C9A66",
-            "major": 0,
-            "minor": 0
         }
     ]
 }
