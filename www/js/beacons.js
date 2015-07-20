@@ -78,6 +78,7 @@ function didRangeBeacons (result) {
 function didDetermineState (result) {
     console.log('Monitoring state:' + JSON.stringify(result));
 }
+
 /**
  * @param beacons {array} [{ major, minor }, { major, minor }, ...]
  */
