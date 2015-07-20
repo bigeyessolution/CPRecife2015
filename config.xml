@@ -24,11 +24,11 @@
     <preference name="android-minSdkVersion" value="15" />
     <preference name="android-installLocation" value="auto" />
     <gap:plugin name="org.apache.cordova.device" />
-    <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
+    <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.vibration" />
+    <gap:plugin name="eu.mobilion.ibeacon" />
     <gap:plugin name="de.appplant.cordova.plugin.background-mode"/>
-    <gap:plugin name="com.unarin.cordova.beacon" />
     <gap:plugin name="de.appplant.cordova.plugin.local-notification" />
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="www/res/icon/android/icon-36-ldpi.png" />
