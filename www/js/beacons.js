@@ -19,14 +19,23 @@
 var beaconsList = false;
 var urlToSendBeaconsInfo = false;
 var lastPlacesIds = [];
+var lastRegionState = '';
+var regionStateIsChanged = false;
 var region = false;
+var lastNearestBeacon = false;
 
-function beaconsInit() {    
+function beaconsInit() {
+    ibeacon.identifier = device.platform + ':' + device.uuid;
+    region = new ibeacon.Region( { uuid: '20CAE8A0-A9CF-11E3-A5E2-0800200C9A66' } );
+        
+    startMonitoring ();
+    startRanging ();
+    
     $.getJSON('https://s3.amazonaws.com/cdn.campuse.ro/cprecife.beacon.json', function (data) {
         urlToSendBeaconsInfo = data.info_to_url != '' ? data.info_to_url : false;
 
         beaconsList = data.beacons;
-
+        
         window.localStorage.setItem('beaconsList', JSON.stringify(data));
     }).fail(function() {
         var tmpData = window.localStorage.getItem('beaconsList');
@@ -48,8 +57,7 @@ function beaconsInit() {
         urlToSendBeaconsInfo = tmpData.info_to_url != '' ? tmpData.info_to_url : false;
         beaconsList = data.beacons;
     }).done(function () {
-        startMonitoring ();
-        startRanging ();
+        
     });
 }
 
@@ -70,17 +78,28 @@ function stopRanging () {
 }
 
 function didRangeBeacons (result) {
-    console.log('Beacons: ' + JSON.stringify(result.beacons));
-    
     if (result.beacons.length == 0) { return; }
     
     var beacon = nearestBeacon(result.beacons);
     
-    findCampusPartyPlace (beacon);
+    if (beacon === false) { return; }
+    
+    if (isSameBeacon(lastNearestBeacon, beacon)) { return; }
+    
+    lastNearestBeacon = beacon;
+    
+    var place = findCampusPartyPlace (beacon);
+    
+    console.log('Place: ' + JSON.stringify( place ));
 }
 
 function didDetermineState (result) {
-    console.log('Monitoring state:' + JSON.stringify(result));
+    if (result.state !== lastRegionState) {
+        lastRegionState = result.state;
+        regionStateIsChanged = true;
+    } else {
+        regionStateIsChanged = false;
+    }
 }
 
 /**
@@ -90,42 +109,57 @@ function findCampusPartyPlace (beacon) {
     for (var index in beaconsList) {
         var placeBeacon = beaconsList[index];
         
-        if (placeBeacon.major == beacon.major &&
+        if (placeBeacon.uuid.toLowerCase() == beacon.uuid.toLowerCase() && 
+            placeBeacon.major == beacon.major &&
             placeBeacon.minor == beacon.minor) {
             
             //report the device's place
-            if (urlToSendBeaconsInfo) {
-                $.post(urlToSendBeaconsInfo, placeBeacon);
-            }
+//            if (urlToSendBeaconsInfo) {
+//                $.post(urlToSendBeaconsInfo, placeBeacon);
+//            }
             
-            console.log("Você está aqui: " + JSON.stringify(placeBeacon));
+//            if (lastPlacesIds.indexOf(placeBeacon.place_id) > -1) { continue; }
+//            
+//            lastPlacesIds.push(placeBeacon.place_id);
+//            
+//            if (placeBeacon.place_type == 'stage') {                
+//                var schedule = getStageInfo(placeBeacon.stage_slug);
+//                
+//                addBeaconNotification(schedule);
+//                
+//                navigator.notification.alert(
+//                    'Olha só o que esttá rolando neste palco: ' + schedule.title, 
+//                    function(){}, 'Ei você!', 'OK'
+//                );
+//            }
             
-            if (lastPlacesIds.indexOf(placeBeacon.place_id) > -1) { continue; }
-            
-            lastPlacesIds.push(placeBeacon.place_id);
-            
-            if (placeBeacon.place_type == 'stage') {                
-                var schedule = getStageInfo(placeBeacon.stage_slug);
-                
-                addBeaconNotification(schedule);
-                
-                navigator.notification.alert(
-                    'Olha só o que esttá rolando neste palco: ' + schedule.title, 
-                    function(){}, 'Ei você!', 'OK'
-                );
-            }
+            return placeBeacon;
         }
     }
+    
+    return false;
 }
 
 function nearestBeacon (beacons) {
-    var nBeacon = beacons[0];
+    var nBeacon = false;
+    var lastProximity = 'far';
     
     for (var index in beacons) {
         var beacon = beacons[index];
         
-        if (beacon.rssi > 0 && beacon.rssi < nBeacon.rssi) {
+        if (beacon.proximity == 'far') continue;
+        
+        if (lastProximity == 'immediate' && beacon.proximity == 'near') continue;
+        
+        if (nBeacon === false) {
             nBeacon = beacon;
+            lastProximity = beacon.proximity;
+        } else if ( lastProximity == 'near' && beacon.proximity == 'immediate' ) {
+            nBeacon = beacon;
+            lastProximity = beacon.proximity;
+        } else if (beacon.rssi > 0 && beacon.rssi < nBeacon.rssi) {//both proximity are equals
+            nBeacon = beacon;
+            lastProximity = beacon.proximity;
         }
     }
     
@@ -145,4 +179,12 @@ function getStageInfo (stageName) {
     }
     
     return false;
+}
+
+function isSameBeacon (beacon1, beacon2) {
+    if (typeof beacon1 == 'boolean' || typeof beacon2 == 'boolean') { return false; }
+    
+    return beacon1.uuid === beacon2.uuid 
+        && beacon1.major === beacon2.major 
+        && beacon1.minor === beacon2.minor;
 }

@@ -77,7 +77,10 @@ function prepareUI () {
             $("#beacon-notifications").listview("refresh");
         }
         
+        /* gaPlugin is crashing in Moto-G 1st generation.
+         * see index.js about line 28.
         gaPlugin.trackPage( gaSuccessHandler, gaErrorHandler, toPage);
+        */
     });
 }
 

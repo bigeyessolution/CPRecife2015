@@ -25,9 +25,13 @@ document.addEventListener('deviceready', function () {
     
     beaconsInit();
     
+    /* gaPlugin is crashing app on Moto-G 1st generation
+     * see ui-funcions.js, about line 80.
+     *
     gaPlugin = window.plugins.gaPlugin;
     gaPlugin.init(gaSuccessHandler, gaErrorHandler, "UA-59229933-2", 10);
-        
+    */
+    
     //Ativar exibição de notificações no app
 }, false);
 
