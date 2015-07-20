@@ -218,29 +218,30 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
     text-shadow: none !important;
 }
 
-#page-schedule .cp-bg-23 a {
-    background-image: url('../img/bg_terra2.png');
+#page-schedule .ui-listview li {
+    margin-top: 0.8em;
+}
+
+#page-schedule .ui-listview li a {
     background-color: rgba(84, 84, 84, 1.0);
     padding: 1.8em 1em;
     font-size: 1.2em;
+}
+
+#page-schedule .cp-bg-23 a {
+    background-image: url('../img/bg_terra2.png');
 }
 
 #page-schedule .cp-bg-24 a {
     background-image: url('../img/bg_terra3.png');
-    background-color: rgba(84, 84, 84, 1.0);
-    padding: 1.8em 1em;
-    font-size: 1.2em;
 }
 
 #page-schedule .cp-bg-25 a {
     background-image: url('../img/bg_terra4.png');
-    background-color: rgba(84, 84, 84, 1.0);
-    padding: 1.8em 1em;
-    font-size: 1.2em;
 }
 
-#page-schedule .ui-listview li {
-    margin-top: 0.8em;
+#page-schedule .cp-bg-26 a {
+    background-image: url('../img/bg_terra5.png');
 }
 
 #page-schedule .ui-listview h2 { color: #ffffff !important; }

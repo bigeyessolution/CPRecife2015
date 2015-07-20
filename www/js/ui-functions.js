@@ -15,6 +15,11 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+var scheduleData = [];
+var scheduleDataLastUpdate = 0;
+var scheduleTimeToLive = 1800000; /*30 minutes*/
+var _listviewNotifications = []; //Notifications to show at Beacons Tab
+var _listviewNotificationsId = []; //All notifications
 
 function prepareUI () {
     $("[data-role='navbar']").navbar();
@@ -66,11 +71,13 @@ function prepareUI () {
     $(':mobile-pagecontainer').on('pagecontainershow', 
     function (event, ui) {
         var toPage = ui.toPage.attr("id");
-        if (toPage == 'page-schedule-by-stage') { 
+        if (toPage == 'page-schedule-by-stage') {
+            $('#page-schedule-by-stage li').hide();
+            
             populateSchedule();
         } else if (toPage == 'page-beacon') {
-            for (var index=0; index < _listviewBeacons.length; index++) {
-                $('<li data-icon="false"><h1>' + _listviewBeacons.title + '</h1></li>')
+            for (var index=0; index < _listviewNotifications.length; index++) {
+                $('<li data-icon="false"><h1>' + _listviewNotifications.title + '</h1></li>')
                     .appendTo('#beacon-notifications');
             }
             
@@ -84,20 +91,32 @@ function prepareUI () {
     });
 }
 
-var dataSchedule = [];
+function _getScheduleData (data) {
+    scheduleData = data;
+    scheduleDataLastUpdate = (new Date()).getTime();
+
+    window.localStorage.setItem('schedule', JSON.stringify(data));
+    window.localStorage.setItem('scheduleTimeToLive', scheduleTimeToLive);
+}
+
+function updateScheduleData (populateHandler) {
+    var now = (new Date).getTime();
+    
+    if (now - scheduleDataLastUpdate < scheduleTimeToLive) { console.log("Sem download");
+        populateHandler();
+    } else { console.log("Com download");
+        $.getJSON('http://campuse.ro/api/legacy/events/campus-party-recife-2015/schedule/', _getScheduleData)
+        .fail(function () {
+            var data = window.localStorage.getItem('schedule');
+
+            _getScheduleData(data ? JSON.parse(data) : []);
+        }).done(populateHandler);
+    }
+}
 
 function populateSchedule () {
-    $.getJSON(
-        'http://campuse.ro/api/legacy/events/campus-party-recife-2015/schedule/',
-    function (data) {
-        dataSchedule = data;
-        window.localStorage.setItem('schedule', JSON.stringify(data));
-    }).fail(function () {
-        var data = window.localStorage.getItem('schedule');
-
-        dataSchedule = data ? JSON.parse(data) : [];
-    }).done(function () {
-        $.each(dataSchedule, function (index, data) {                                
+    function _populateSchedule () {
+        $.each(scheduleData, function (index, data) {                                
             var aux = data.date.split(" ");
             var aux_date = aux[0].split("-");
 
@@ -107,15 +126,19 @@ function populateSchedule () {
                 var date = new Date (data.date);
 
                 $("<li><h3>" 
-                    + data.title 
-                    + "</h3><p>" + aux_hour[0] + ":" + aux_hour[1] 
-                    + "</p></li>"
-                ).appendTo( getListIdToStage(data.stage_slug) );
+                  + data.title 
+                  + "</h3><p>" + aux_hour[0] + ":" + aux_hour[1] 
+                  + "</p></li>"
+                 ).appendTo( getListIdToStage(data.stage_slug) );
             }
         });
-
+        
+        $('#page-schedule-by-stage li:not(:has(.be-schedule-list:empty))').show();
+            
         $(".be-schedule-list").listview("refresh");
-    });
+    }
+    
+    updateScheduleData(_populateSchedule);
 }
 
 function populateMagistrais () {
@@ -209,32 +232,35 @@ function getListIdToStage (stage_slug) {
     }
 }
 
-function populateSchedulePage (cacheId, data) {
-    for (var index = 0; index < data.length; index ++) {
-        var aux = data[index].date.split(" ");
-        var aux_date = aux[0].split("-");
-        
-        if( aux_date[2] != _dayFilter ) continue;
-                
-        var aux_hour = aux[1].split(":");
-        
-        var date = new Date (data[index].date);
-        
-        $("<li><h3>" + data[index].title 
-            + "</h3><p>" + aux_hour[0] + ":" + aux_hour[1] 
-            + "</p></li>")
-        .appendTo( getListIdToStage(data[index].stage_slug) );
-    }
-    
-    $(".be-schedule-list").listview("refresh");
-}
-
-var _listviewBeacons = [];
+//function populateSchedulePage (cacheId, data) {
+//    for (var index = 0; index < data.length; index ++) {
+//        var aux = data[index].date.split(" ");
+//        var aux_date = aux[0].split("-");
+//        
+//        if( aux_date[2] != _dayFilter ) continue;
+//                
+//        var aux_hour = aux[1].split(":");
+//        
+//        var date = new Date (data[index].date);
+//        
+//        $("<li><h3>" + data[index].title 
+//            + "</h3><p>" + aux_hour[0] + ":" + aux_hour[1] 
+//            + "</p></li>")
+//        .appendTo( getListIdToStage(data[index].stage_slug) );
+//    }
+//    
+//    $(".be-schedule-list").listview("refresh");
+//}
 
 function addBeaconNotification (schedule) {
-    _listviewBeacons.unshift(schedule);
+    if (_listviewNotificationsId.indexOf[schedule.id] > -1) return false;
     
-    if(_listviewBeacons.length > 3) {
-        _listviewBeacons.pop();
+    _listviewNotifications.unshift(schedule);
+    _listviewNotificationsId.unshift(schedule.id);
+    
+    if(_listviewNotifications.length > 3) {
+        _listviewNotifications.pop();
     }
+    
+    return true;
 }

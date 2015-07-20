@@ -90,8 +90,27 @@ function didRangeBeacons (result) {
     
     var place = findCampusPartyPlace (beacon);
     
-    console.log('Place: ' + JSON.stringify( place ));
+    /* Reporting device's place*/
+    if (urlToSendBeaconsInfo) { $.post(urlToSendBeaconsInfo, place); }
+    
+    if (place.place_type == 'stage') {
+        function _addNotification () {
+            var schedule = getStageInfo(place.stage_slug);
+            
+            addBeaconNotification(schedule);
+        }
+        
+        updateScheduleData(_addNotification);
+    }
+    
+    //console.log('Place: ' + JSON.stringify( place ));
 }
+            
+//                navigator.notification.alert(
+//                    'Olha só o que esttá rolando neste palco: ' + schedule.title, 
+//                    function(){}, 'Ei você!', 'OK'
+//                );
+//            }
 
 function didDetermineState (result) {
     if (result.state !== lastRegionState) {
@@ -112,26 +131,6 @@ function findCampusPartyPlace (beacon) {
         if (placeBeacon.uuid.toLowerCase() == beacon.uuid.toLowerCase() && 
             placeBeacon.major == beacon.major &&
             placeBeacon.minor == beacon.minor) {
-            
-            //report the device's place
-//            if (urlToSendBeaconsInfo) {
-//                $.post(urlToSendBeaconsInfo, placeBeacon);
-//            }
-            
-//            if (lastPlacesIds.indexOf(placeBeacon.place_id) > -1) { continue; }
-//            
-//            lastPlacesIds.push(placeBeacon.place_id);
-//            
-//            if (placeBeacon.place_type == 'stage') {                
-//                var schedule = getStageInfo(placeBeacon.stage_slug);
-//                
-//                addBeaconNotification(schedule);
-//                
-//                navigator.notification.alert(
-//                    'Olha só o que esttá rolando neste palco: ' + schedule.title, 
-//                    function(){}, 'Ei você!', 'OK'
-//                );
-//            }
             
             return placeBeacon;
         }
@@ -166,25 +165,35 @@ function nearestBeacon (beacons) {
     return nBeacon;
 }
 
-function getStageInfo (stageName) {
-    var time = (new Data).getTime();
+function getStageInfo (stage_slug) {
+    var time = (new Date).getTime();
     
-    for (var index = dataSchedule.length; index >=0; index --) {
-        var date = new Date (dataSchedule[index].date);
+    for (var index = scheduleData.length - 1; index >=0; index --) {
+        if (scheduleData[index].stage_slug !== stage_slug) { continue; }
         
-        //Percorrendo de trás para frente. O primeiro >= é o evento ocorrendo.
-        if (time >= date.getTime()) {
-            return dataSchedule[index].date;
+        var date = getDateFromStage (scheduleData[index].date);
+        
+        if (time >= date) {
+            return scheduleData[index];
         }
     }
     
     return false;
 }
 
+function getDateFromStage (date_string) {
+    var aux = date_string.split(' ');
+    var date = aux[0].split('-');
+    var clock = aux[1].split(':');
+    var dateObj = new Date(parseInt(date[0]), parseInt(date[1]) - 1, parseInt(date[2]), parseInt(clock[0]), parseInt(clock[1]), 0, 0);
+    
+    return dateObj.getTime();
+}
+
 function isSameBeacon (beacon1, beacon2) {
     if (typeof beacon1 == 'boolean' || typeof beacon2 == 'boolean') { return false; }
     
-    return beacon1.uuid === beacon2.uuid 
+    return beacon1.uuid.toLowerCase() === beacon2.uuid.toLowerCase()
         && beacon1.major === beacon2.major 
         && beacon1.minor === beacon2.minor;
 }
