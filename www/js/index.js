@@ -51,6 +51,8 @@ document.addEventListener('deviceready', function () {
 document.addEventListener('pause', function () {
     isAppInBackground = true;
     
+    
+    
 });
 
 document.addEventListener('resume', function () {
