@@ -41,12 +41,3 @@ document.addEventListener('resume', function () {
     //Ativar exibição de notificações no app
     startNearestBeaconDisplayTimer();
 });
-
-
-//apagar depois
-$(function(){    
-    
-    prepareUI(); 
-
-    populateMagistrais();
-})
