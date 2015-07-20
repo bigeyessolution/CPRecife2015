@@ -16,9 +16,11 @@
  */
 
 var isAppInBackground = false;
+var gaPlugin = false;
 
 document.addEventListener('deviceready', function () {
-//    platform = device.platform;
+    gaPlugin = window.plugins.gaPlugin;
+    gaPlugin.init(gaSuccessHandler, gaErrorHandler, "UA-59229933-2", 10);
     
     beaconsInit();
     
@@ -32,12 +34,14 @@ document.addEventListener('deviceready', function () {
 
 document.addEventListener('pause', function () {
     isAppInBackground = true;
-    //Desativar exibição de notificações no app
-    stopNearestBeaconDisplayTimer();
+    
 });
 
 document.addEventListener('resume', function () {
     isAppInBackground = false;
-    //Ativar exibição de notificações no app
-    startNearestBeaconDisplayTimer();
+    
 });
+
+function gaSuccessHandler () { }
+
+function gaErrorHandler () { }

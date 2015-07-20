@@ -66,13 +66,24 @@ function prepareUI () {
     $(':mobile-pagecontainer').on('pagecontainershow', 
     function (event, ui) {
         var toPage = ui.toPage.attr("id");
-        if (toPage == 'page-schedule-by-stage') populateSchedule();
+        if (toPage == 'page-schedule-by-stage') { 
+            populateSchedule();
+        } else if (toPage == 'page-beacon') {
+            for (var index=0; index < _listviewBeacons.length; index++) {
+                $('<li data-icon="false"><h1>' + _listviewBeacons.title + '</h1></li>')
+                    .appendTo('#beacon-notifications');
+            }
+            
+            $("#beacon-notifications").listview("refresh");
+        }
+        
+        gaPlugin.trackPage( gaSuccessHandler, gaErrorHandler, toPage);
     });
 }
 
+var dataSchedule = [];
+
 function populateSchedule () {
-    var dataSchedule = [];
-        
     $.getJSON(
         'http://campuse.ro/api/legacy/events/campus-party-recife-2015/schedule/',
     function (data) {
@@ -213,4 +224,14 @@ function populateSchedulePage (cacheId, data) {
     }
     
     $(".be-schedule-list").listview("refresh");
+}
+
+var _listviewBeacons = [];
+
+function addBeaconNotification (schedule) {
+    _listviewBeacons.unshift(schedule);
+    
+    if(_listviewBeacons.length > 3) {
+        _listviewBeacons.pop();
+    }
 }

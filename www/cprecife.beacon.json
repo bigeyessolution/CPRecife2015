@@ -3,7 +3,7 @@
     "info_to_url": "",
     "beacons": [
         {
-            "id": "0",
+            "place_id": "PalcoTerraCPRec4",
             "description": "Palco Terra CPRec4",
             "place_type": "stage",
             "stage_slug" : "PalcoTerraCPRec4",
@@ -12,10 +12,9 @@
             "minor": 2646
         },
         {
-            "id": "4",
-            "description": "Palco Lua CPRec4",
-            "place_type": "stage",
-            "stage_slug" : "PalcoLuaCPRec4",
+            "place_id": "cathering",
+            "description": "Cathering",
+            "place_type": "other",
             "uuid": "20cae8a0-a9cf-11e3-a5e2-0800200c9a66",
             "major": 213,
             "minor": 17780
