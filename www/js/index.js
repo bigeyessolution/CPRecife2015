@@ -19,7 +19,7 @@ var isAppInBackground = false;
 var gaPlugin = false;
 
 document.addEventListener('deviceready', function () {
-    prepareUI(); 
+    prepareUI();
 
     populateMagistrais();
     
@@ -41,6 +41,6 @@ document.addEventListener('resume', function () {
     
 });
 
-function gaSuccessHandler () { }
+function gaSuccessHandler() { }
 
-function gaErrorHandler () { }
+function gaErrorHandler() { }

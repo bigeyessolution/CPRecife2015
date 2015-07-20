@@ -18,11 +18,10 @@
 //var delefate = false;
 var beaconsList = false;
 var urlToSendBeaconsInfo = false;
-var lastPlaceId = '';
+var lastPlacesIds = [];
 var region = false;
 
-function beaconsInit() {
-    
+function beaconsInit() {    
     $.getJSON('https://s3.amazonaws.com/cdn.campuse.ro/cprecife.beacon.json', function (data) {
         urlToSendBeaconsInfo = data.info_to_url != '' ? data.info_to_url : false;
 
@@ -73,6 +72,11 @@ function stopRanging () {
 function didRangeBeacons (result) {
     console.log('Beacons: ' + JSON.stringify(result.beacons));
     
+    if (result.beacons.length == 0) { return; }
+    
+    var beacon = nearestBeacon(result.beacons);
+    
+    findCampusPartyPlace (beacon);
 }
 
 function didDetermineState (result) {
@@ -89,11 +93,16 @@ function findCampusPartyPlace (beacon) {
         if (placeBeacon.major == beacon.major &&
             placeBeacon.minor == beacon.minor) {
             
-            if (placeBeacon.place_id == lastPlaceId) return;
-            
-            lastPlaceId = placeBeacon.place_id;
+            //report the device's place
+            if (urlToSendBeaconsInfo) {
+                $.post(urlToSendBeaconsInfo, placeBeacon);
+            }
             
             console.log("Você está aqui: " + JSON.stringify(placeBeacon));
+            
+            if (lastPlacesIds.indexOf(placeBeacon.place_id) > -1) { continue; }
+            
+            lastPlacesIds.push(placeBeacon.place_id);
             
             if (placeBeacon.place_type == 'stage') {                
                 var schedule = getStageInfo(placeBeacon.stage_slug);
@@ -101,22 +110,26 @@ function findCampusPartyPlace (beacon) {
                 addBeaconNotification(schedule);
                 
                 navigator.notification.alert(
-                    'Tá rolando uma palestra massa aqui: ' + schedule.title, 
-                    function(){}, 
-                    'Ei você!', 'OK');
-            }
-            
-            //gaPlugin
-            
-            if (urlToSendBeaconsInfo) {
-                $.post(urlToSendBeaconsInfo, placeBeacon);
+                    'Olha só o que esttá rolando neste palco: ' + schedule.title, 
+                    function(){}, 'Ei você!', 'OK'
+                );
             }
         }
     }
 }
 
 function nearestBeacon (beacons) {
+    var nBeacon = beacons[0];
     
+    for (var index in beacons) {
+        var beacon = beacons[index];
+        
+        if (beacon.rssi > 0 && beacon.rssi < nBeacon.rssi) {
+            nBeacon = beacon;
+        }
+    }
+    
+    return nBeacon;
 }
 
 function getStageInfo (stageName) {
