@@ -19,17 +19,16 @@ var isAppInBackground = false;
 var gaPlugin = false;
 
 document.addEventListener('deviceready', function () {
-    gaPlugin = window.plugins.gaPlugin;
-    gaPlugin.init(gaSuccessHandler, gaErrorHandler, "UA-59229933-2", 10);
-    
-    beaconsInit();
-    
     prepareUI(); 
 
     populateMagistrais();
     
-    //Ativar exibição de notificações no app
+    beaconsInit();
     
+    gaPlugin = window.plugins.gaPlugin;
+    gaPlugin.init(gaSuccessHandler, gaErrorHandler, "UA-59229933-2", 10);
+        
+    //Ativar exibição de notificações no app
 }, false);
 
 document.addEventListener('pause', function () {
