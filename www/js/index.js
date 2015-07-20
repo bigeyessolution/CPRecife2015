@@ -25,9 +25,22 @@ document.addEventListener('deviceready', function () {
     
     beaconsInit();
     
-    /* gaPlugin is crashing app on Moto-G 1st generation
-     * see ui-funcions.js, about line 80.
-     *
+    
+    if (device.platform == 'Android') {
+        cordova.plugins.backgroundMode.setDefaults({
+            title:  'Campus Party Recife 2015',
+            ticker: 'CPRecife4',
+            text:   ''
+        })
+    } else if (device.platform == 'iOS') {
+    }
+    
+    cordova.plugins.backgroundMode.configure({ silent: false });
+    
+    cordova.plugins.backgroundMode.enable();
+    
+    /*
+     * crashing. See ui-functions line 85.
     gaPlugin = window.plugins.gaPlugin;
     gaPlugin.init(gaSuccessHandler, gaErrorHandler, "UA-59229933-2", 10);
     */

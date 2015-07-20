@@ -63,7 +63,9 @@ function prepareUI () {
     $(':mobile-pagecontainer').on('pagecontainerbeforechange', 
     function (event, ui) {
         var prevPage = ui.prevPage.attr("id");
-        if (prevPage == 'page-schedule-by-stage') { 
+        if (prevPage == 'page-schedule-by-stage') {
+            $('#page-schedule-by-stage li').hide();
+            
             $("#page-schedule-by-stage .ui-collapsible").collapsible("collapse");
         }
     });
@@ -76,16 +78,11 @@ function prepareUI () {
             
             populateSchedule();
         } else if (toPage == 'page-beacon') {
-            for (var index=0; index < _listviewNotifications.length; index++) {
-                $('<li data-icon="false"><h1>' + _listviewNotifications.title + '</h1></li>')
-                    .appendTo('#beacon-notifications');
-            }
-            
-            $("#beacon-notifications").listview("refresh");
+            populateBeaconsNotificationList();
         }
         
-        /* gaPlugin is crashing in Moto-G 1st generation.
-         * see index.js about line 28.
+        /*
+         * crashing. see index.js line 29.
         gaPlugin.trackPage( gaSuccessHandler, gaErrorHandler, toPage);
         */
     });
@@ -102,9 +99,9 @@ function _getScheduleData (data) {
 function updateScheduleData (populateHandler) {
     var now = (new Date).getTime();
     
-    if (now - scheduleDataLastUpdate < scheduleTimeToLive) { console.log("Sem download");
+    if (now - scheduleDataLastUpdate < scheduleTimeToLive) {
         populateHandler();
-    } else { console.log("Com download");
+    } else {
         $.getJSON('http://campuse.ro/api/legacy/events/campus-party-recife-2015/schedule/', _getScheduleData)
         .fail(function () {
             var data = window.localStorage.getItem('schedule');
@@ -139,6 +136,23 @@ function populateSchedule () {
     }
     
     updateScheduleData(_populateSchedule);
+}
+
+function populateBeaconsNotificationList () {
+    var pageId = $( ":mobile-pagecontainer" ).pagecontainer( "getActivePage" ).attr('id');
+    
+    if (pageId != 'page-beacon') { return; }
+    
+    $('#beacon-notifications').empty();
+            
+    for (var index in _listviewNotifications) {
+        var extra = index == 0 ? '<h2>' + _listviewNotifications[index].stage_name + '</h2>' : '';
+        
+        $('<li data-icon="false"><h1>' + _listviewNotifications[index].title + '</h1>' + extra + '</li>')
+        .appendTo('#beacon-notifications');
+    }
+            
+    $("#beacon-notifications").listview("refresh");
 }
 
 function populateMagistrais () {
@@ -230,37 +244,4 @@ function getListIdToStage (stage_slug) {
         case 'ConteudosbyComunidadesCPRecife4':
             return '#schedule-list-bycommunity';
     }
-}
-
-//function populateSchedulePage (cacheId, data) {
-//    for (var index = 0; index < data.length; index ++) {
-//        var aux = data[index].date.split(" ");
-//        var aux_date = aux[0].split("-");
-//        
-//        if( aux_date[2] != _dayFilter ) continue;
-//                
-//        var aux_hour = aux[1].split(":");
-//        
-//        var date = new Date (data[index].date);
-//        
-//        $("<li><h3>" + data[index].title 
-//            + "</h3><p>" + aux_hour[0] + ":" + aux_hour[1] 
-//            + "</p></li>")
-//        .appendTo( getListIdToStage(data[index].stage_slug) );
-//    }
-//    
-//    $(".be-schedule-list").listview("refresh");
-//}
-
-function addBeaconNotification (schedule) {
-    if (_listviewNotificationsId.indexOf[schedule.id] > -1) return false;
-    
-    _listviewNotifications.unshift(schedule);
-    _listviewNotificationsId.unshift(schedule.id);
-    
-    if(_listviewNotifications.length > 3) {
-        _listviewNotifications.pop();
-    }
-    
-    return true;
 }

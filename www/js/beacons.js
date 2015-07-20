@@ -27,6 +27,10 @@ var lastNearestBeacon = false;
 function beaconsInit() {
     ibeacon.identifier = device.platform + ':' + device.uuid;
     region = new ibeacon.Region( { uuid: '20CAE8A0-A9CF-11E3-A5E2-0800200C9A66' } );
+    
+    cordova.plugins.notification.local.on("click", function (notification) {
+        $(':mobile-pagecontainer').pagecontainer("change", "#page-beacon");
+    });
         
     startMonitoring ();
     startRanging ();
@@ -77,6 +81,9 @@ function stopRanging () {
     ibeacon.stopRangingBeaconsInRegion({ region: region });
 }
 
+var _lastPostPosTime = 0;
+var _intervalToPostPos = 600000; //10 minutes
+
 function didRangeBeacons (result) {
     if (result.beacons.length == 0) { return; }
     
@@ -84,33 +91,70 @@ function didRangeBeacons (result) {
     
     if (beacon === false) { return; }
     
-    if (isSameBeacon(lastNearestBeacon, beacon)) { return; }
-    
-    lastNearestBeacon = beacon;
+//    if (isSameBeacon(lastNearestBeacon, beacon)) { return; }
+//    lastNearestBeacon = beacon;
     
     var place = findCampusPartyPlace (beacon);
     
     /* Reporting device's place*/
-    if (urlToSendBeaconsInfo) { $.post(urlToSendBeaconsInfo, place); }
+    if (urlToSendBeaconsInfo) { 
+        var time = (new Date()).getTime();
+        
+        if (time - _lastPostPosTime > _intervalToPostPos) {
+            _lastPostPosTime = time;
+            
+            $.post(urlToSendBeaconsInfo, place);
+        }
+    }
     
     if (place.place_type == 'stage') {
         function _addNotification () {
             var schedule = getStageInfo(place.stage_slug);
             
-            addBeaconNotification(schedule);
+            if (schedule === false) { return; }
+            
+            if (addBeaconNotification(schedule)) {
+                alertInBeaconPlace(schedule);
+                
+                if (isAppInBackground === false) {
+                    populateBeaconsNotificationList ();
+                }
+            };
         }
         
         updateScheduleData(_addNotification);
     }
-    
-    //console.log('Place: ' + JSON.stringify( place ));
 }
-            
-//                navigator.notification.alert(
-//                    'Olha só o que esttá rolando neste palco: ' + schedule.title, 
-//                    function(){}, 'Ei você!', 'OK'
-//                );
-//            }
+
+function addBeaconNotification (schedule) {
+    schedule_id = parseInt(schedule.id);
+    if (_listviewNotificationsId.indexOf(schedule_id) > -1) return false;
+    
+    _listviewNotifications.unshift(schedule);
+    _listviewNotificationsId.unshift(schedule_id);
+    
+    if(_listviewNotifications.length > 3) {
+        _listviewNotifications.pop();
+    }
+    
+    return true;
+}
+
+function alertInBeaconPlace (schedule) {
+    var title = 'Olha só o quê está rolando!';
+    var text = 'Ei campusero! Está rolando uma palestra muito interessante no ' + 
+        schedule.stage_name + ': ' + schedule.title;
+    
+    navigator.notification.alert(text, function(){}, title, 'OK');
+    
+    navigator.vibrate([300, 700, 1000]);
+    
+    cordova.plugins.notification.local.schedule({
+        id: schedule.id,
+        title: title,
+        text: text
+    });
+}
 
 function didDetermineState (result) {
     if (result.state !== lastRegionState) {
@@ -174,7 +218,10 @@ function getStageInfo (stage_slug) {
         var date = getDateFromStage (scheduleData[index].date);
         
         if (time >= date) {
-            return scheduleData[index];
+            var max_talk_time = 3600000; // 1 hour
+            var time_diff = date + max_talk_time;
+                
+            return time > time_diff ? false : scheduleData[index];
         }
     }
     
