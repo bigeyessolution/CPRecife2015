@@ -218,8 +218,22 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
     text-shadow: none !important;
 }
 
-#page-schedule .ui-listview a {
+#page-schedule .cp-bg-23 a {
     background-image: url('../img/bg_terra2.png');
+    background-color: rgba(84, 84, 84, 1.0);
+    padding: 1.8em 1em;
+    font-size: 1.2em;
+}
+
+#page-schedule .cp-bg-24 a {
+    background-image: url('../img/bg_terra3.png');
+    background-color: rgba(84, 84, 84, 1.0);
+    padding: 1.8em 1em;
+    font-size: 1.2em;
+}
+
+#page-schedule .cp-bg-25 a {
+    background-image: url('../img/bg_terra4.png');
     background-color: rgba(84, 84, 84, 1.0);
     padding: 1.8em 1em;
     font-size: 1.2em;
@@ -241,7 +255,10 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
     margin-bottom: 0.5em;
 }
 
-.cp-speakers { text-align: center !important; overflow: hidden; }
+.cp-speakers { 
+    text-align: center !important;  
+    overflow: hidden;     
+}
 
 .cp-speakers img {
     border-radius:50% ;
@@ -249,12 +266,37 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
     -webkit-border-radius:50%;
     width: 65%;
     height: 65%;
-    margin-bottom: 1.6rem !important;    
-    margin-top: 2rem !important;
+    border: 0.4em double#77216E !important;
 }
 
-.cp-speakers h3 { font-size: 1.6em; }
+.cp-speakers h3 { 
+    font-size: 1.6em;
+    font-family: robotothin !important;
+    text-shadow: none !important;   
+    font-weight: lighter !important; 
+    margin-bottom: 0.8em !important;
+}
 
-.cp-speakers h2 {  font-size: 1.2em; }
+.cp-speakers h2 {  
+    font-size: 1.2em;  
+    font-family: robotothin !important;
+    text-shadow: none !important;   
+    font-weight: lighter !important; 
+    margin-top: 0.5em !important;
+    margin-bottom: 1em !important;
+ }
 
+.imgAgenda{
+    text-align: center;
+}
+ .imgAgenda img{
+    width: 90%;
+    height: auto;
+}
+.beacon-text h2{
+    font-size: 2.2em;  
+    font-family: robotothin !important;
+    text-shadow: none !important;   
+    font-weight: lighter !important;
+}
 ul.ui-collapsible-set { padding: 0 !important; list-style-type: none !important; }

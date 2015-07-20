@@ -106,6 +106,8 @@ function populateSchedule () {
 
 function populateMagistrais () {
     var magistrais = [
+        { name: "Lorrana Scarpioni", img: "lorrana_scarpioni-m.png" },
+        { name: "Neil Harbisson", img: "neil_harbisson-m.jpg" },
         { name: "Dado Schneider", img: "dado_schneider-d.jpg" }, 
         { name: "David Ruiz", img: "david_ruiz.jpg" }, 
         { name: "Dino Lincoln", img: "dino_lincoln.jpg" }, 
@@ -116,11 +118,9 @@ function populateMagistrais () {
         { name: "HD Mabuse", img: "hd_mabuse.png" },
         { name: "Henrique Foresti", img: "henrique_foresti.jpg" },
         { name: "Kiev Gama", img: "kiev_gama.png" },
-        { name: "Leonardo Leitão", img: "leonardo_leitao.png" },
-        { name: "Lorrana Scarpioni", img: "lorrana_scarpioni-m.png" }, 
+        { name: "Leonardo Leitão", img: "leonardo_leitao.png" }, 
         { name: "Mario Chapela", img: "mario_chapela.jpg" },
         { name: "Moacy Alves Jr", img: "moacy_alves_jr.jpg" },
-        { name: "Neil Harbisson", img: "neil_harbisson-m.jpg" },
         { name: "NIC Br", img: "nic_br.jpg" },
         { name: "Paulo Henrique Santana", img: "paulo_henrique_santana.jpg" },
         { name: "Rodrigo Medeiros", img: "rodrigo_medeiros.jpg" },
@@ -130,7 +130,7 @@ function populateMagistrais () {
     $.each(magistrais, function (key, speaker) {
         var img_src = 'img/speakers/' + speaker.img;
         
-        $('<img src="' + img_src + '"></br><h2>' 
+        $('<img src="' + img_src + '"><h2>' 
             + speaker.name 
             + '</h2></br>'
         ).appendTo(".cp-speakers");

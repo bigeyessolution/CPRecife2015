@@ -74,14 +74,17 @@ with Campus Party Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
             </div>
             
             <div role="main" class="ui-content">
+                <!--<div class="imgAgenda" >
+                    <img src="img/img_agenda.png" alt=""/>
+                </div>-->                
                 <ul data-role="listview">
-                    <li data-icon="false"><a onclick="showScheduleByDay(23)">
+                    <li data-icon="false" class="cp-bg-23"><a onclick="showScheduleByDay(23)">
                         <h2>23 de julho de 2015</h2>
                     </a></li>
-                    <li data-icon="false"><a onclick="showScheduleByDay(24)">
+                    <li data-icon="false" class="cp-bg-24"><a onclick="showScheduleByDay(24)">
                         <h2>24 de julho de 2015</h2>
                     </a></li>
-                    <li data-icon="false"><a onclick="showScheduleByDay(25)">
+                    <li data-icon="false" class="cp-bg-25"><a onclick="showScheduleByDay(25)">
                         <h2>25 de julho de 2015</h2>
                     </a></li>
                 </ul>
@@ -157,9 +160,10 @@ with Campus Party Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
             <div data-role="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" class="be-ui-footer-line cp-bg-creativity">
                 <img src="img/cp-logo.png" alt="" class="cp-bg-creativity">
             </div>
-            
+            <div class="page-news">
             <div role="main" class="ui-content cp-speakers">
-                <h3>Magistrais, destaques e curadores.</h3><br>
+                <h3>Magistrais, destaques e curadores.</h3>
+            </div>
             </div>
             <a class="btn-to-top"></a>
         </section> <!-- end #page-news -->
@@ -170,10 +174,10 @@ with Campus Party Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
             </div>
             
             <div role="main" class="ui-content">
-                <div id="beaconlog" class="ui-body"></div> <!--
-                <div class="ui-body" style="text-align: center">
-                    <img src="img/img-beacon-on.png" alt="Beacon On" style="width: 60%; height: auto;">         
-                    <ul id="beacon-notifications" data-role="listview" data-inset="true">
+                <div id="beaconlog" class="ui-body"></div>
+                <div class="ui-body beacon-text" style="text-align: center">
+                    <img src="img/img-beacon-on.png" alt="Beacon On" style="width: 60%; height: auto;">       
+                    <!--<ul id="beacon-notifications" data-role="listview" data-inset="true">
                         <li data-icon="false">
                             <h1>Titulo da primeira palestra</h1>
                             <h2>Palestrante</h2>
@@ -184,14 +188,11 @@ with Campus Party Recife 2015 App. If not, see <http://www.gnu.org/licenses/>.
                         <li data-icon="false">
                             <h2>Titulo da terceira palestra</h2>
                         </li>
-                    </ul>
-                    <h2>Saiba o que est&#225; rolando nos palcos.</h2>
-                    <p>
-                        A CP Recife 2015 traz essa novidade para voc&#234;: 
-                        basta passar em frente ao palco para saber qual &eacute; 
-                        a palestra.
-                    </p>
-                </div>-->
+                    </ul>-->
+                    <h2>Saiba o que est&#225; rolando nos palcos</h2>
+                    <p>A CP Recife 2015 traz essa novidade para voc&#234;</p>
+                    <p><i>Ative seu bluetooth para utilizar esse recurso ;)</i></p>                    
+                </div>
             </div>
             <a class="btn-to-top"></a>
         </section> <!-- end #page-beacon -->
