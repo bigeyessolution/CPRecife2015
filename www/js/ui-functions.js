@@ -25,6 +25,8 @@ function prepareUI () {
     $("[data-role='navbar']").navbar();
     $("#header-menu").toolbar();
     
+    $('.be-loading').hide();
+    
     $(".animateMe .ui-collapsible-heading-toggle").click(function (e) {
         var current = $(this).closest(".ui-collapsible");
         
@@ -63,9 +65,7 @@ function prepareUI () {
     $(':mobile-pagecontainer').on('pagecontainerbeforechange', 
     function (event, ui) {
         var prevPage = ui.prevPage.attr("id");
-        if (prevPage == 'page-schedule-by-stage') {
-            $('#page-schedule-by-stage li').hide();
-            
+        if (prevPage == 'page-schedule-by-stage') {            
             $("#page-schedule-by-stage .ui-collapsible").collapsible("collapse");
         }
     });
@@ -74,8 +74,6 @@ function prepareUI () {
     function (event, ui) {
         var toPage = ui.toPage.attr("id");
         if (toPage == 'page-schedule-by-stage') {
-            $('#page-schedule-by-stage li').hide();
-            
             populateSchedule();
         } else if (toPage == 'page-beacon') {
             populateBeaconsNotificationList();
@@ -112,7 +110,14 @@ function updateScheduleData (populateHandler) {
 }
 
 function populateSchedule () {
+    $('#page-schedule-by-stage li').hide();
+    $(".be-schedule-list").empty();
+    
+    //mostrar loading
+    $('.be-loading').fadeIn();
+    
     function _populateSchedule () {
+        
         $.each(scheduleData, function (index, data) {                                
             var aux = data.date.split(" ");
             var aux_date = aux[0].split("-");
@@ -130,9 +135,14 @@ function populateSchedule () {
             }
         });
         
-        $('#page-schedule-by-stage li:not(:has(.be-schedule-list:empty))').show();
+        //Esconder loading
+        $('.be-loading').fadeOut(500, function() {
+            $('#page-schedule-by-stage li:not(:has(.be-schedule-list:empty))').slideDown();
             
-        $(".be-schedule-list").listview("refresh");
+            $(".be-schedule-list").listview("refresh");
+        });
+            
+        
     }
     
     updateScheduleData(_populateSchedule);
@@ -200,8 +210,6 @@ var _dateFilter = new Date (2015, 07, 23);
 
 function showScheduleByDay (day) {
     _dayFilter = day;
-    
-    $(".be-schedule-list").empty();
     
     $(':mobile-pagecontainer')
         .pagecontainer("change", "#page-schedule-by-stage");

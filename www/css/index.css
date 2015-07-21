@@ -300,4 +300,11 @@ h1, h2, h3, h4, h5, h6, h7 { font-family: robotomedium; }
     text-shadow: none !important;   
     font-weight: lighter !important;
 }
+
 ul.ui-collapsible-set { padding: 0 !important; list-style-type: none !important; }
+
+.be-loading {
+    width: 90%;
+    height: auto;
+    /*centralizar*/
+}
