@@ -8,6 +8,7 @@
         Big Eyes Solution Team
     </author>
     <content src="index.html" />
+    <preference name="phonegap-version" value="cli-5.1.1"/>
     <preference name="permissions" value="none" />
     <preference name="orientation" value="portrait" />
     <preference name="target-device" value="universal" />
@@ -18,8 +19,10 @@
     <preference name="ios-statusbarstyle" value="black-translucent" />
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="false" />
-    <preference name="show-splash-screen-spinner" value="true" />
+    <preference name="show-splash-screen-spinner" value="false" />
     <preference name="auto-hide-splash-screen" value="true" />
+    <preference name="FadeSplashScreen" value="true"/>
+    <preference name="FadeSplashScreenDuration" value="4"/>
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="15" />
     <preference name="android-installLocation" value="auto" />
@@ -27,9 +30,9 @@
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.vibration" />
-    <gap:plugin name="eu.mobilion.ibeacon" />
+    <gap:plugin name="eu.mobilion.ibeacon" source="plugins.cordova.io" />
     <gap:plugin name="de.appplant.cordova.plugin.background-mode"/>
-    <gap:plugin name="de.appplant.cordova.plugin.local-notification" />
+    <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.8.1" source="plugins.cordova.io" />
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/icon-36-ldpi.png" />
     <icon gap:platform="android" gap:qualifier="mdpi" src="res/icon/android/icon-48-mdpi.png" />
