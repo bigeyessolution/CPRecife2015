@@ -30,7 +30,7 @@
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.vibration" />
-    <gap:plugin name="eu.mobilion.ibeacon" source="plugins.cordova.io" />
+    <gap:plugin name="eu.mobilion.ibeacon" />
     <gap:plugin name="de.appplant.cordova.plugin.background-mode"/>
     <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.8.1" source="plugins.cordova.io" />
     <icon src="icon.png" />
