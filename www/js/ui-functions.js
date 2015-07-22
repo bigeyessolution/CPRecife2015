@@ -84,6 +84,8 @@ function prepareUI () {
         gaPlugin.trackPage( gaSuccessHandler, gaErrorHandler, toPage);
         */
     });
+    
+    navigator.splashscreen.hide();
 }
 
 function _getScheduleData (data) {
