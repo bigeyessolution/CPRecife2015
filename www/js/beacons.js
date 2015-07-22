@@ -15,8 +15,6 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-//var delefate = false;
-var beaconsList = false;
 var urlToSendBeaconsInfo = false;
 var lastPlacesIds = [];
 var lastRegionState = '';
@@ -34,35 +32,6 @@ function beaconsInit() {
         
     startMonitoring ();
     startRanging ();
-    
-    $.getJSON('https://s3.amazonaws.com/cdn.campuse.ro/cprecife.beacon.json', function (data) {
-        urlToSendBeaconsInfo = data.info_to_url != '' ? data.info_to_url : false;
-
-        beaconsList = data.beacons;
-        
-        window.localStorage.setItem('beaconsList', JSON.stringify(data));
-    }).fail(function() {
-        var tmpData = window.localStorage.getItem('beaconsList');
-
-        tmpData = tmpData ? JSON.parse(tmpData) : false;
-
-        if (tmpData === false) {
-            beaconsList = false;
-            urlToSendBeaconsInfo = false;
-
-            return;
-        }
-
-        for (index in tmpData.beacons) {
-            tmpData.beacons[index].major = parseInt(tmpData.beacons[index].major);
-            tmpData.beacons[index].minor = parseInt(tmpData.beacons[index].minor);
-        }
-
-        urlToSendBeaconsInfo = tmpData.info_to_url != '' ? tmpData.info_to_url : false;
-        beaconsList = data.beacons;
-    }).done(function () {
-        
-    });
 }
 
 function startMonitoring () {
@@ -244,3 +213,59 @@ function isSameBeacon (beacon1, beacon2) {
         && beacon1.major === beacon2.major 
         && beacon1.minor === beacon2.minor;
 }
+
+var beaconsList = [
+    { place_id: "PalcoTerraCPRec4", description: "Palco Terra", place_type: "stage", stage_slug : "PalcoTerraCPRec4", major: 125, minor: 17304 },
+    { place_id: "PalcoTerraCPRec4", description: "Palco Terra", place_type: "stage", stage_slug : "PalcoTerraCPRec4", major: 125, minor: 18106 },
+    { place_id: "PalcoLuaCPRec4", description: "Palco Lua", place_type: "stage", stage_slug : "PalcoLuaCPRec4", major: 125, minor: 15446 },
+    { place_id: "PalcoMarteCPRec4", description: "Palco Marte", place_type: "stage", stage_slug : "PalcoMarteCPRec4", major: 125, minor: 15890 },
+    { place_id: "PalcoJupiterCPRecife", description: "Palco Jupiter", place_type: "stage", stage_slug : "PalcoJupiterCPRecife", major: 125, minor: 19059 },
+    { place_id: "PalcoSaturnoCPRec4", description: "Placo Saturno", place_type: "stage", stage_slug : "PalcoSaturnoCPRec4", major: 125, minor: 19035 },
+    { place_id: "PalcoVenusCPRec4", description: "Palco Venus", place_type: "stage", stage_slug : "PalcoVenusCPRec4", major: 125, minor: 15362 },
+    { place_id: "Workshop1CienciaCPRecife4", description: "Workshop I Ciência", place_type: "stage", stage_slug : "Workshop1CienciaCPRecife4", major: 125, minor: 18569 },
+    { place_id: "Workshop2inovacaoCPRecife4", description: "Workshop II Inovaçãoo", place_type: "stage", stage_slug : "Workshop2inovacaoCPRecife4", major: 125, minor: 17400 },
+    { place_id: "freeplay", description: "FreePlay", place_type: "other", stage_slug : "", major: 125, minor: 15976 },
+    { place_id: "chillout27", description: "Chillout 27", place_type: "other", stage_slug : "", major: 125, minor: 16357 },
+    { place_id: "chillout28", description: "Chillout 28", place_type: "other", stage_slug : "", major: 125, minor: 18063 },
+    { place_id: "postomedico", description: "Posto Médico", place_type: "saude", stage_slug : "", major: 125, minor: 2631 },
+    { place_id: "arenasebrae", description: "Arena SEBRAE", place_type: "arena", stage_slug : "", major: 125, minor: 16257 },
+    { place_id: "arenanassau", description: "Arena Nassau", place_type: "arena", stage_slug : "", major: 125, minor: 17332 },
+    { place_id: "3coracoes", description: "3 Corações", place_type: "stand", stage_slug : "", major: 213, minor: 13048 },
+    { place_id: "vivo", description: "VIVO", place_type: "stand", stage_slug : "", major: 213, minor: 964 },
+    { place_id: "acessopublicodireito", description: "Acesso público da direita", place_type: "acesso", stage_slug : "", major: 213, minor: 2032 },
+    { place_id: "acessopublicoesquerdo", description: "Acesso público da esquerda", place_type: "acesso", stage_slug : "", major: 213, minor: 603 },
+    { place_id: "chillout29", description: "Chillout 29", place_type: "other", stage_slug : "", major: 213, minor: 1954 },
+    { place_id: "chillout30", description: "Chillout 30", place_type: "other", stage_slug : "", major: 213, minor: 2364 },
+    { place_id: "ovni1", description: "OVNI 1", place_type: "ovni", stage_slug : "", major: 213, minor: 11672 },
+    { place_id: "ovni2", description: "OVNI 2", place_type: "ovni", stage_slug : "", major: 213, minor: 1944 },
+    { place_id: "ovni3", description: "OVNI 3", place_type: "ovni", stage_slug : "", major: 213, minor: 959 },
+    { place_id: "ovni4", description: "OVNI 4", place_type: "ovni", stage_slug : "", major: 213, minor: 558 },
+    { place_id: "camping1", description: "Saída do Camping", place_type: "camping", stage_slug : "", major: 213, minor: 1005 },
+    { place_id: "camping2", description: "Entrada do Camping", place_type: "camping", stage_slug : "", major: 213, minor: 1984 },
+    { place_id: "nicbr", description: "NIC.br", place_type: "stand", stage_slug : "", major: 213, minor: 13006 },
+    { place_id: "transrecife", description: "Transforma Recife", place_type: "stand", stage_slug : "", major: 213, minor: 1972 },
+    { place_id: "catering1", description: "Pegatinas Catering", place_type: "catering", stage_slug : "", major: 213, minor: 65397 },
+    { place_id: "catering2", description: "Acesso Catering", place_type: "catering", stage_slug : "", major: 213, minor: 597 },
+    { place_id: "chillout31", description: "Chillout 31", place_type: "other", stage_slug : "", major: 213, minor: 988 },
+    { place_id: "imprensa1", description: "Pegatinas imprensa", place_type: "imprensa", stage_slug : "", major: 213, minor: 1753 },
+    { place_id: "imprensa2", description: "Sala de imprensa", place_type: "imprensa", stage_slug : "", major: 213, minor: 1965 },
+    { place_id: "chuveiros1", description: "Acesso chuveiros", place_type: "other", stage_slug : "", major: 213, minor: 2355 },
+    { place_id: "InclusaoDigitalIICPRecife4", description: "Inclusão Digital II", place_type: "stage", stage_slug : "InclusaoDigitalIICPRecife4", major: 7, minor: 45002 },
+    { place_id: "vip", description: "Área VIP", place_type: "other", stage_slug : "", major: 125, minor: 16980 },
+    { place_id: "InclusaoDigitalICPRecife4", description: "Inclusão Digital I", place_type: "stage", stage_slug : "InclusaoDigitalICPRecife4", major: 7, minor: 44333 },
+    { place_id: "mezanino", description: "Entrada para o mezanino", place_type: "other", stage_slug : "", major: 7, minor: 44659 },
+    { place_id: "PalcoStartupMakersCampCPRecife4", description: "Palco Startup&Makers", place_type: "stage", stage_slug : "PalcoStartupMakersCampCPRecife4", major: 125, minor: 17580 },
+    { place_id: "startups", description: "Startups", place_type: "startups", stage_slug : "", major: 125, minor: 18617 },
+    { place_id: "sebraeopen", description: "SEBRAE Open", place_type: "other", stage_slug : "", major: 125, minor: 19336 },
+    { place_id: "cbn", description: "CBN", place_type: "stand", stage_slug : "", major: 125, minor: 14303 },
+    { place_id: "exgeek", description: "Exposição Geek", place_type: "expo", stage_slug : "", major: 125, minor: 18966 },
+    { place_id: "cesar", description: "CESAR", place_type: "stand", stage_slug : "", major: 125, minor: 18947 },
+    { place_id: "simuladores", description: "Simuladores", place_type: "other", stage_slug : "", major: 213, minor: 2389 },
+    { place_id: "prefeitura", description: "Prefeitura de Recife", place_type: "other", stage_slug : "", major: 213, minor: 2319 },
+    { place_id: "WorkshopStartupMakersCampCPRecife4", description: "Workshop Startup&Makers", place_type: "stage", stage_slug : "WorkshopStartupMakersCampCPRecife4", major: 213, minor: 1013 },
+    { place_id: "credenciamento", description: "Credenciamento", place_type: "other", stage_slug : "", major: 213, minor: 2024 },
+    { place_id: "cpfuture", description: "Campus Future", place_type: "other", stage_slug : "", major: 213, minor: 2601 },
+    { place_id: "bigeyes1", description: "Pequeno teste 1", place_type: "stage", stage_slug: "teste", major: 213, minor: 2646 },
+    { place_id: "bigeyes2", description: "Pequeno teste 2", place_type: "stage", stage_slug: "teste", major: 213, minor: 17780 },
+    { place_id: "bigeyes3", description: "Pequeno teste 3", place_type: "stage", stage_slug: "teste", major: 213, minor: 17156 }
+];

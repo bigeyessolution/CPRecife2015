@@ -18,15 +18,12 @@
 var isAppInBackground = false;
 var gaPlugin = false;
 
-document.addEventListener('deviceready', function () {
-    navigator.splashscreen.show();
-    
+document.addEventListener('deviceready', function () {    
     prepareUI();
 
     populateMagistrais();
     
     beaconsInit();
-    
     
     if (device.platform == 'Android') {
         cordova.plugins.backgroundMode.setDefaults({
@@ -46,17 +43,10 @@ document.addEventListener('deviceready', function () {
     gaPlugin = window.plugins.gaPlugin;
     gaPlugin.init(gaSuccessHandler, gaErrorHandler, "UA-59229933-2", 10);
     */
-    
-    setTimeout(function() {
-        navigator.splashscreen.hide();
-    }, 1000);
 }, false);
 
 document.addEventListener('pause', function () {
     isAppInBackground = true;
-    
-    
-    
 });
 
 document.addEventListener('resume', function () {
@@ -67,5 +57,3 @@ document.addEventListener('resume', function () {
 function gaSuccessHandler() { }
 
 function gaErrorHandler() { }
-
-$(function () { prepareUI();});

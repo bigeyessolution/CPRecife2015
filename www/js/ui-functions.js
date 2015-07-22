@@ -126,11 +126,10 @@ function populateSchedule () {
                 var aux_hour = aux[1].split(":");
 
                 var date = new Date (data.date);
+                
+                var hour = aux_hour[0] - 3;
 
-                $("<li><h3>" 
-                  + data.title 
-                  + "</h3><p>" + aux_hour[0] + ":" + aux_hour[1] 
-                  + "</p></li>"
+                $("<li><h3>" + data.title + "</h3><p>" + hour + ":" + aux_hour[1] + "</p></li>"
                  ).appendTo( getListIdToStage(data.stage_slug) );
             }
         });
@@ -186,14 +185,12 @@ function populateMagistrais () {
         { name: "Paulo Henrique Santana", img: "paulo_henrique_santana.jpg" },
         { name: "Rodrigo Medeiros", img: "rodrigo_medeiros.jpg" },
         { name: "Sergio Sacani", img: "sergio_sacani.jpg" }
-    ]
+    ];
     
     $.each(magistrais, function (key, speaker) {
         var img_src = 'img/speakers/' + speaker.img;
         
-        $('<img src="' + img_src + '"><h2>' 
-            + speaker.name 
-            + '</h2></br>'
+        $('<img src="' + img_src + '"><h2>' + speaker.name + '</h2></br>'
         ).appendTo(".cp-speakers");
     });
 }
