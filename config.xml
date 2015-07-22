@@ -12,23 +12,12 @@
     <preference name="orientation" value="portrait" />
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="false" />
-    <preference name="webviewbounce" value="true" />
     <preference name="prerendered-icon" value="true" />
-    <preference name="stay-in-webview" value="false" />
     <preference name="ios-statusbarstyle" value="black-translucent" />
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="false" />
     <preference name="auto-hide-splash-screen" value="false" />
-    <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="15" />
-    <preference name="android-installLocation" value="auto" />
-    <gap:plugin name="org.apache.cordova.device" />
-    <gap:plugin name="org.apache.cordova.splashscreen" />
-    <gap:plugin name="org.apache.cordova.dialogs" />
-    <gap:plugin name="org.apache.cordova.vibration" />
-    <gap:plugin name="eu.mobilion.ibeacon" />
-    <gap:plugin name="de.appplant.cordova.plugin.background-mode"/>
-    <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.8.1" source="plugins.cordova.io" />
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/icon-36-ldpi.png" />
     <icon gap:platform="android" gap:qualifier="mdpi" src="res/icon/android/icon-48-mdpi.png" />
@@ -51,8 +40,15 @@
     <gap:splash gap:platform="ios" height="1242" src="res/screen/ios/screen-iphone6p-portrait.png" width="2208" />
     <gap:splash gap:platform="ios" height="1024" src="res/screen/ios/screen-ipad-portrait.png" width="768"/>
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen.jpg" />
-    <access origin="*" />
+    <gap:plugin name="org.apache.cordova.device" />
+    <gap:plugin name="org.apache.cordova.splashscreen"/>
+    <gap:plugin name="org.apache.cordova.dialogs" />
+    <gap:plugin name="org.apache.cordova.vibration" />
+    <gap:plugin name="eu.mobilion.ibeacon" />
+    <gap:plugin name="de.appplant.cordova.plugin.background-mode"/>
+    <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.8.1" source="plugins.cordova.io" />
     <plugin name="cordova-plugin-whitelist" version="1" />
+    <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
