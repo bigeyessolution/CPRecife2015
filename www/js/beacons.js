@@ -264,8 +264,5 @@ var beaconsList = [
     { place_id: "prefeitura", description: "Prefeitura de Recife", place_type: "other", stage_slug : "", major: 213, minor: 2319 },
     { place_id: "WorkshopStartupMakersCampCPRecife4", description: "Workshop Startup&Makers", place_type: "stage", stage_slug : "WorkshopStartupMakersCampCPRecife4", major: 213, minor: 1013 },
     { place_id: "credenciamento", description: "Credenciamento", place_type: "other", stage_slug : "", major: 213, minor: 2024 },
-    { place_id: "cpfuture", description: "Campus Future", place_type: "other", stage_slug : "", major: 213, minor: 2601 },
-    { place_id: "bigeyes1", description: "Pequeno teste 1", place_type: "stage", stage_slug: "teste", major: 213, minor: 2646 },
-    { place_id: "bigeyes2", description: "Pequeno teste 2", place_type: "stage", stage_slug: "teste", major: 213, minor: 17780 },
-    { place_id: "bigeyes3", description: "Pequeno teste 3", place_type: "stage", stage_slug: "teste", major: 213, minor: 17156 }
+    { place_id: "cpfuture", description: "Campus Future", place_type: "other", stage_slug : "", major: 213, minor: 2601 }
 ];
