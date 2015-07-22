@@ -16,7 +16,7 @@
     <preference name="ios-statusbarstyle" value="black-translucent" />
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="false" />
-    <preference name="auto-hide-splash-screen" value="true" />
+    <preference name="auto-hide-splash-screen" value="false" />
     <preference name="android-minSdkVersion" value="15" />
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/icon-36-ldpi.png" />
@@ -41,7 +41,7 @@
     <gap:splash gap:platform="ios" height="1024" src="res/screen/ios/screen-ipad-portrait.png" width="768"/>
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen.jpg" />
     <gap:plugin name="org.apache.cordova.device" />
-    <gap:plugin name="org.apache.cordova.splashscreen"/>
+    <gap:plugin name="br.com.paveisitemas.splashscreen" />
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.vibration" />
     <gap:plugin name="eu.mobilion.ibeacon" />
