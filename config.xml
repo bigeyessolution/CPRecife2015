@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.bigeyessolution.CampusPartyRecife" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.bigeyessolution.CampusPartyRecife" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Campus Party Recife 2015</name>
     <description>
         The Official Campus Party Mobile App for CPRecife 2015.
@@ -41,7 +41,7 @@
     <gap:splash gap:platform="ios" height="1024" src="res/screen/ios/screen-ipad-portrait.png" width="768"/>
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen.jpg" />
     <gap:plugin name="org.apache.cordova.device" />
-    <gap:plugin name="br.com.paveisitemas.splashscreen" />
+    <gap:plugin name="org.apache.cordova.splashscreen"/>
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.vibration" />
     <gap:plugin name="eu.mobilion.ibeacon" />
