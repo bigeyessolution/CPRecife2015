@@ -18,7 +18,9 @@
 var isAppInBackground = false;
 var gaPlugin = false;
 
-document.addEventListener('deviceready', function () {    
+document.addEventListener('deviceready', function () {
+    navigator.splashscreen.show();
+
     prepareUI();
 
     populateMagistrais();
@@ -43,6 +45,8 @@ document.addEventListener('deviceready', function () {
     gaPlugin = window.plugins.gaPlugin;
     gaPlugin.init(gaSuccessHandler, gaErrorHandler, "UA-59229933-2", 10);
     */
+    
+    navigator.splashscreen.hide();
 }, false);
 
 document.addEventListener('pause', function () {
