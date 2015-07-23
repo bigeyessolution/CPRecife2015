@@ -43,7 +43,7 @@
     <gap:splash gap:platform="ios" height="1024" src="www/res/screen/ios/screen-ipad-portrait.png" width="768"/>
     <gap:splash gap:platform="winphone" src="www/res/screen/windows-phone/screen.jpg" />
     <gap:plugin name="org.apache.cordova.device" />
-    <gap:plugin name="org.apache.cordova.splashscreen" version="2.1.0" source="npm" />
+    <gap:plugin name="org.apache.cordova.splashscreen" version="2.1.1" source="npm" />
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.vibration" />
     <gap:plugin name="eu.mobilion.ibeacon" />
