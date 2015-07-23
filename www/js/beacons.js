@@ -15,7 +15,8 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-var urlToSendBeaconsInfo = 'http://10.0.1.11/beaconcprecife4.php';
+//var urlToSendBeaconsInfo = 'http://10.0.1.11/beaconcprecife4.php';
+var urlToSendBeaconsInfo = false;
 var lastPlacesIds = [];
 var lastRegionState = '';
 var regionStateIsChanged = false;

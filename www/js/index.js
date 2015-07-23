@@ -39,12 +39,9 @@ document.addEventListener('deviceready', function () {
     cordova.plugins.backgroundMode.configure({ silent: false });
     
     cordova.plugins.backgroundMode.enable();
-    
-    /*
-     * crashing. See ui-functions line 85.
+        
     gaPlugin = window.plugins.gaPlugin;
     gaPlugin.init(gaSuccessHandler, gaErrorHandler, "UA-59229933-2", 10);
-    */
     
     navigator.splashscreen.hide();
 }, false);
