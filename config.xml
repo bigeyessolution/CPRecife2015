@@ -44,6 +44,7 @@
     <gap:splash gap:platform="winphone" src="www/res/screen/windows-phone/screen.jpg" />
     <gap:plugin name="org.apache.cordova.device" />
     <gap:plugin name="org.apache.cordova.splashscreen" version="2.1.1" source="npm" />
+    <gap:plugin name="com.adobe.plugins.gaplugin" version="2.4.0" />
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.vibration" />
     <gap:plugin name="eu.mobilion.ibeacon" />
