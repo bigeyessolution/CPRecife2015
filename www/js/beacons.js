@@ -15,12 +15,13 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-var urlToSendBeaconsInfo = false;
+var urlToSendBeaconsInfo = 'http://10.0.1.11/beaconcprecife4.php';
 var lastPlacesIds = [];
 var lastRegionState = '';
 var regionStateIsChanged = false;
 var region = false;
 var lastNearestBeacon = false;
+var beaconsUUID = '20cae8a0-a9cf-11e3-a5e2-0800200c9a66';
 
 function beaconsInit() {
     ibeacon.identifier = device.platform + ':' + device.uuid;
@@ -32,6 +33,8 @@ function beaconsInit() {
         
     startMonitoring ();
     startRanging ();
+    
+    console.log(JSON.stringify(beaconsList));
 }
 
 function startMonitoring () {
@@ -53,7 +56,7 @@ function stopRanging () {
 var _lastPostPosTime = 0;
 var _intervalToPostPos = 600000; //10 minutes
 
-function didRangeBeacons (result) {
+function didRangeBeacons (result) {    
     if (result.beacons.length == 0) { return; }
     
     var beacon = nearestBeacon(result.beacons);
@@ -68,11 +71,15 @@ function didRangeBeacons (result) {
     /* Reporting device's place*/
     if (urlToSendBeaconsInfo) { 
         var time = (new Date()).getTime();
+        var beaconInfoToSend = place;
+        
+        beaconInfoToSend.uuid = device.uuid;
+        beaconInfoToSend.platform = device.platform;
         
         if (time - _lastPostPosTime > _intervalToPostPos) {
             _lastPostPosTime = time;
             
-            $.post(urlToSendBeaconsInfo, place);
+            $.post(urlToSendBeaconsInfo, beaconInfoToSend);
         }
     }
     
@@ -141,7 +148,7 @@ function findCampusPartyPlace (beacon) {
     for (var index in beaconsList) {
         var placeBeacon = beaconsList[index];
         
-        if (placeBeacon.uuid.toLowerCase() == beacon.uuid.toLowerCase() && 
+        if (beaconsUUID == beacon.uuid.toLowerCase() && 
             placeBeacon.major == beacon.major &&
             placeBeacon.minor == beacon.minor) {
             
