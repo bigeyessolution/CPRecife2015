@@ -19,6 +19,8 @@ var isAppInBackground = false;
 var gaPlugin = false;
 
 document.addEventListener('deviceready', function () {
+    navigator.splashscreen.show();
+
     prepareUI();
 
     populateMagistrais();
@@ -37,9 +39,14 @@ document.addEventListener('deviceready', function () {
     cordova.plugins.backgroundMode.configure({ silent: false });
     
     cordova.plugins.backgroundMode.enable();
-        
-//    gaPlugin = window.plugins.gaPlugin;
-//    gaPlugin.init(gaSuccessHandler, gaErrorHandler, "UA-59229933-2", 10);
+    
+    /*
+     * crashing. See ui-functions line 85.
+    gaPlugin = window.plugins.gaPlugin;
+    gaPlugin.init(gaSuccessHandler, gaErrorHandler, "UA-59229933-2", 10);
+    */
+    
+    navigator.splashscreen.hide();
 }, false);
 
 document.addEventListener('pause', function () {

@@ -15,8 +15,7 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-//var urlToSendBeaconsInfo = 'http://10.0.1.11/beaconcprecife4.php';
-var urlToSendBeaconsInfo = false;
+var urlToSendBeaconsInfo = 'http://clico.net/beacon/send/';
 var lastPlacesIds = [];
 var lastRegionState = '';
 var regionStateIsChanged = false;
@@ -24,7 +23,7 @@ var region = false;
 var lastNearestBeacon = false;
 var beaconsUUID = '20cae8a0-a9cf-11e3-a5e2-0800200c9a66';
 var _lastPostPosTime = 0;
-var _intervalToPostPos = 600000; //1 minute
+var _intervalToPostPos = 3000;//00; //5 minute
 
 function beaconsInit() {
     ibeacon.identifier = device.platform + ':' + device.uuid;
@@ -36,8 +35,6 @@ function beaconsInit() {
         
     startMonitoring ();
     startRanging ();
-    
-    console.log(JSON.stringify(beaconsList));
 }
 
 function startMonitoring () {
@@ -225,7 +222,7 @@ function sendBeaconsInfo (beacons) {
             var beacon = beacons[index];
             var place = findCampusPartyPlace (beacon);
             
-            beacon.device_uuid = ;
+            beacon.device_uuid = uuid;
             beacon.platform = platform;
             
             if (place !== false) {
@@ -239,12 +236,21 @@ function sendBeaconsInfo (beacons) {
         }
     }
     
+    function __success (data) {
+        console.log("Send: " + JSON.stringify(beaconsToSend));
+        console.log("Response: " + JSON.stringify(data));
+    }
+    
+    console.log("Sended : " + JSON.stringify(beaconsToSend));
+    
     $.ajax(urlToSendBeaconsInfo, { 
         data : JSON.stringify(beaconsToSend),
         dataType: 'json',
-        async: false,
         contentType: 'application/json; charset=utf-8',
-        type : 'POST'
+        crossDomain: true,
+        method: 'post',
+        type : 'POST',
+        success: __success
     });
 }
 
@@ -298,5 +304,6 @@ var beaconsList = [
     { place_id: "prefeitura", description: "Prefeitura de Recife", place_type: "other", stage_slug : "", major: 213, minor: 2319 },
     { place_id: "WorkshopStartupMakersCampCPRecife4", description: "Workshop Startup&Makers", place_type: "stage", stage_slug : "WorkshopStartupMakersCampCPRecife4", major: 213, minor: 1013 },
     { place_id: "credenciamento", description: "Credenciamento", place_type: "other", stage_slug : "", major: 213, minor: 2024 },
-    { place_id: "cpfuture", description: "Campus Future", place_type: "other", stage_slug : "", major: 213, minor: 2601 }
+    { place_id: "cpfuture", description: "Campus Future", place_type: "other", stage_slug : "", major: 213, minor: 2601 },
+    { place_id: "PalcoTerraCPRec4", description: "Beacon de teste", place_type: "stage", stage_slug : "PalcoTerraCPRec4", major: 213, minor: 2646 }
 ];
