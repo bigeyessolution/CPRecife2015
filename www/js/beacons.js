@@ -23,7 +23,7 @@ var region = false;
 var lastNearestBeacon = false;
 var beaconsUUID = '20cae8a0-a9cf-11e3-a5e2-0800200c9a66';
 var _lastPostPosTime = 0;
-var _intervalToPostPos = 3000;//00; //5 minute
+var _intervalToPostPos = 300000; //5 minute
 
 function beaconsInit() {
     ibeacon.identifier = device.platform + ':' + device.uuid;
@@ -147,17 +147,12 @@ function nearestBeacon (beacons) {
     for (var index in beacons) {
         var beacon = beacons[index];
         
-        if (beacon.proximity == 'far') continue;
-        
-        if (lastProximity == 'immediate' && beacon.proximity == 'near') continue;
+        if (beacon.proximity != 'immediate') continue;
         
         if (nBeacon === false) {
             nBeacon = beacon;
             lastProximity = beacon.proximity;
-        } else if ( lastProximity == 'near' && beacon.proximity == 'immediate' ) {
-            nBeacon = beacon;
-            lastProximity = beacon.proximity;
-        } else if (beacon.rssi > 0 && beacon.rssi < nBeacon.rssi) {//both proximity are equals
+        } else if (beacon.rssi > 0 && beacon.rssi < nBeacon.rssi) {
             nBeacon = beacon;
             lastProximity = beacon.proximity;
         }
@@ -189,7 +184,7 @@ function getDateFromStage (date_string) {
     var aux = date_string.split(' ');
     var date = aux[0].split('-');
     var clock = aux[1].split(':');
-    var dateObj = new Date(parseInt(date[0]), parseInt(date[1]) - 1, parseInt(date[2]), parseInt(clock[0]), parseInt(clock[1]), 0, 0);
+    var dateObj = new Date(parseInt(date[0]), parseInt(date[1]) - 1, parseInt(date[2]), parseInt(clock[0]) - 3, parseInt(clock[1]), 0, 0);
     
     return dateObj.getTime();
 }
@@ -237,11 +232,9 @@ function sendBeaconsInfo (beacons) {
     }
     
     function __success (data) {
-        console.log("Send: " + JSON.stringify(beaconsToSend));
-        console.log("Response: " + JSON.stringify(data));
+//        console.log("Send: " + JSON.stringify(beaconsToSend));
+//        console.log("Response: " + JSON.stringify(data));
     }
-    
-    console.log("Sended : " + JSON.stringify(beaconsToSend));
     
     $.ajax(urlToSendBeaconsInfo, { 
         data : JSON.stringify(beaconsToSend),
