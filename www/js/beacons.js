@@ -23,6 +23,8 @@ var regionStateIsChanged = false;
 var region = false;
 var lastNearestBeacon = false;
 var beaconsUUID = '20cae8a0-a9cf-11e3-a5e2-0800200c9a66';
+var _lastPostPosTime = 0;
+var _intervalToPostPos = 600000; //1 minute
 
 function beaconsInit() {
     ibeacon.identifier = device.platform + ':' + device.uuid;
@@ -54,35 +56,16 @@ function stopRanging () {
     ibeacon.stopRangingBeaconsInRegion({ region: region });
 }
 
-var _lastPostPosTime = 0;
-var _intervalToPostPos = 600000; //10 minutes
-
 function didRangeBeacons (result) {    
     if (result.beacons.length == 0) { return; }
     
     var beacon = nearestBeacon(result.beacons);
     
+    sendBeaconsInfo (result.beacons); //Envia dados dos beacons
+    
     if (beacon === false) { return; }
     
-//    if (isSameBeacon(lastNearestBeacon, beacon)) { return; }
-//    lastNearestBeacon = beacon;
-    
     var place = findCampusPartyPlace (beacon);
-    
-    /* Reporting device's place*/
-    if (urlToSendBeaconsInfo) { 
-        var time = (new Date()).getTime();
-        var beaconInfoToSend = place;
-        
-        beaconInfoToSend.uuid = device.uuid;
-        beaconInfoToSend.platform = device.platform;
-        
-        if (time - _lastPostPosTime > _intervalToPostPos) {
-            _lastPostPosTime = time;
-            
-            $.post(urlToSendBeaconsInfo, beaconInfoToSend);
-        }
-    }
     
     if (place.place_type == 'stage') {
         function _addNotification () {
@@ -220,6 +203,49 @@ function isSameBeacon (beacon1, beacon2) {
     return beacon1.uuid.toLowerCase() === beacon2.uuid.toLowerCase()
         && beacon1.major === beacon2.major 
         && beacon1.minor === beacon2.minor;
+}
+
+/**
+ * Envia dados os beacons.
+ */
+function sendBeaconsInfo (beacons) {
+    var time = (new Date()).getTime();
+        
+    if (time - _lastPostPosTime < _intervalToPostPos) { return; }
+    
+    _lastPostPosTime = time;
+    
+    var uuid = device.uuid;
+    var platform = device.platform;
+    
+    var beaconsToSend = [];
+    
+    for (var index in beacons) {
+        if (beacons[index].proximity != 'far') {
+            var beacon = beacons[index];
+            var place = findCampusPartyPlace (beacon);
+            
+            beacon.device_uuid = ;
+            beacon.platform = platform;
+            
+            if (place !== false) {
+                beacon.place_id = place.place_id;
+                beacon.description = place.description;
+                beacon.place_type = place.place_type;
+                beacon.stage_slug = place.stage_slug;
+            }
+            
+            beaconsToSend.push (beacon);
+        }
+    }
+    
+    $.ajax(urlToSendBeaconsInfo, { 
+        data : JSON.stringify(beaconsToSend),
+        dataType: 'json',
+        async: false,
+        contentType: 'application/json; charset=utf-8',
+        type : 'POST'
+    });
 }
 
 var beaconsList = [
